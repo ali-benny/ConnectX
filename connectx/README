@@ -2,6 +2,10 @@
 
 		javac -cp ".." *.java */*.java
 
+Funziona questo invece:
+'''
+javac -cp ".." *.java;./L0/*.java;./L1/*.java 
+'''
 
 CXGame application:
 
