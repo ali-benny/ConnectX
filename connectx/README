@@ -4,7 +4,7 @@
 
 Funziona questo invece:
 '''
-javac -cp ".." *.java;./L0/*.java;./L1/*.java 
+javac -cp ".." *.java ./L0/*.java ./L1/*.java ./Bob/*.java
 '''
 
 CXGame application:
@@ -18,10 +18,14 @@ CXGame application:
 
 		java -cp ".." connectx.CXGame 6 7 4 connectx.L0.L0 connectx.L1.L1
 
+		java -cp ".." connectx.CXGame 6 7 4 connectx.L0.L0 connectx.L1.L1
+
 
 CXPlayerTester application:
 
 - Output score only:
+
+	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L0.L0 connectx.Bob.Bob
 
 	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L0.L0 connectx.L1.L1
 
@@ -34,3 +38,5 @@ CXPlayerTester application:
 - Verbose output and customized timeout (1 sec) and number of game repetitions (10 rounds)
 
 	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L0.L0 connectx.L1.L1 -v -t 1 -r 10
+
+	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L1.L1 connectx.Bob.Bob -r 50
