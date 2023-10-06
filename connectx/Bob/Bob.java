@@ -22,8 +22,8 @@ public class Bob implements CXPlayer{
 
   //initPlayer
   public void initPlayer(int M, int N, int X, boolean first, int timeout_in_secs){
-    myWin   = first ? CXGameState.WINP1 : CXGameState.WINP2; 
-		yourWin = first ? CXGameState.WINP2 : CXGameState.WINP1;
+    myWin = first ? CXGameState.WINP1 : CXGameState.WINP2; 
+    yourWin = first ? CXGameState.WINP2 : CXGameState.WINP1;
 
     TIMEOUT = timeout_in_secs;
     START = System.currentTimeMillis(); // Save starting time
