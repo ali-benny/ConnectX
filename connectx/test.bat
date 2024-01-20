@@ -35,7 +35,7 @@ set /a error1=0
 REM Read from the input file
 for /f "delims=" %%a in (%input%) do (
 	echo.
-	echo [37mTesting %%a[0m
+	echo [36mTesting %%a[0m
 	REM Run the game PLAYER0 vs PLAYER1
 	echo - !PLAYER0! vs !PLAYER1! -
 	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER0!.!PLAYER0! connectx.!PLAYER1!.!PLAYER1! -r 1 -t 1') DO (
@@ -84,9 +84,9 @@ for /f "delims=" %%a in (%input%) do (
 REM Print the final result
 echo ==============================
 echo [92mFinal results:[0m
-echo Player !PLAYER0! has Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0! 
-echo Player !PLAYER1! has Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1! 
+echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0! 
+echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1! 
 
-::bell found for hearing end of batch file
+::bell sound for hearing end of batch file
 @echo off
 PowerShell -Command "Write-Host `a"
