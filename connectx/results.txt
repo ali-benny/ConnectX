@@ -54,3 +54,7 @@ L1	 Score: 51, Won: 8, Lost: 37, Draw: 24, Error: 0
 Hope vs L1 Final results: 
 Hope	 Score: 108, Won: 31, Lost: 0, Draw: 15, Error: 24  
 L1	 Score: 87, Won: 0, Lost: 31, Draw: 15, Error: 0  
+============================== 
+Hope vs Bob4 Final results: 
+Hope	 Score: 112, Won: 28, Lost: 1, Draw: 22, Error: 17  
+Bob4	 Score: 76, Won: 1, Lost: 28, Draw: 22, Error: 2  
