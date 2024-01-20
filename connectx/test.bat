@@ -90,3 +90,8 @@ echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Erro
 ::bell sound for hearing end of batch file
 @echo off
 PowerShell -Command "Write-Host `a"
+
+echo ============================== >> results.txt
+echo !PLAYER0! vs !PLAYER1! Final results: >> results.txt
+echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0!  >> results.txt
+echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1!  >> results.txt

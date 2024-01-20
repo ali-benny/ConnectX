@@ -1,0 +1,56 @@
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 87, Won: 17, Lost: 0, Draw: 36, Error: 17  
+L1	 Score: 87, Won: 0, Lost: 17, Draw: 36, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 93, Won: 19, Lost: 0, Draw: 36, Error: 15  
+L1	 Score: 81, Won: 0, Lost: 19, Draw: 36, Error: 0  
+============================== 
+Bob4 vs Hope Final results: 
+Bob4	 Score: 13, Won: 0, Lost: 0, Draw: 13, Error: 56  
+Hope	 Score: 181, Won: 0, Lost: 0, Draw: 13, Error: 0  
+============================== 
+Bob4 vs Hope Final results: 
+Bob4	 Score: 14, Won: 0, Lost: 1, Draw: 14, Error: 55  
+Hope	 Score: 182, Won: 1, Lost: 0, Draw: 14, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 86, Won: 17, Lost: 0, Draw: 35, Error: 18  
+L1	 Score: 89, Won: 0, Lost: 17, Draw: 35, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 98, Won: 22, Lost: 0, Draw: 32, Error: 16  
+L1	 Score: 80, Won: 0, Lost: 22, Draw: 32, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 131, Won: 34, Lost: 1, Draw: 29, Error: 6  
+L1	 Score: 50, Won: 1, Lost: 34, Draw: 29, Error: 0  
+============================== 
+Bob4 vs Hope Final results: 
+Bob4	 Score: 51, Won: 0, Lost: 1, Draw: 27, Error: 34  
+Hope	 Score: 132, Won: 1, Lost: 0, Draw: 27, Error: 8  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 123, Won: 31, Lost: 4, Draw: 30, Error: 5  
+L1	 Score: 57, Won: 4, Lost: 31, Draw: 30, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 118, Won: 29, Lost: 4, Draw: 31, Error: 6  
+L1	 Score: 61, Won: 4, Lost: 29, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 118, Won: 29, Lost: 7, Draw: 31, Error: 3  
+L1	 Score: 61, Won: 7, Lost: 29, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 125, Won: 31, Lost: 4, Draw: 32, Error: 3  
+L1	 Score: 53, Won: 4, Lost: 31, Draw: 32, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 135, Won: 37, Lost: 8, Draw: 24, Error: 1  
+L1	 Score: 51, Won: 8, Lost: 37, Draw: 24, Error: 0  
+============================== 
+Hope vs L1 Final results: 
+Hope	 Score: 108, Won: 31, Lost: 0, Draw: 15, Error: 24  
+L1	 Score: 87, Won: 0, Lost: 31, Draw: 15, Error: 0  
