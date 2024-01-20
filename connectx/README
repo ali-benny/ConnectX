@@ -7,6 +7,9 @@ Funziona questo invece:
 javac -cp ".." *.java ./L0/*.java ./L1/*.java ./Bob/*.java
 '''
 
+Script test.bat, from ./connectx/ directorr run:
+		test.bat <player1> <player2> true|false [for verbose output]
+
 CXGame application:
 
 - Human vs Computer.  In the connectx/ directory run:
@@ -39,4 +42,6 @@ CXPlayerTester application:
 
 	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L0.L0 connectx.L1.L1 -v -t 1 -r 10
 
-	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L1.L1 connectx.Bob.Bob -r 50
+	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.L1.L1 connectx.Bob.Bob -r 5
+
+	java -cp ".." connectx.CXPlayerTester 6 7 4 connectx.Bob2.Bob2 connectx.Bob3.Bob3 -r 10 -t 1
