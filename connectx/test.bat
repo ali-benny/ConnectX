@@ -37,7 +37,7 @@ for /f "delims=" %%a in (%input%) do (
 	echo.
 	echo [36mTesting %%a[0m
 	REM Run the game PLAYER0 vs PLAYER1
-	echo - !PLAYER0! vs !PLAYER1! -
+	echo|set /p= "- !PLAYER0! vs !PLAYER1! - "
 	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER0!.!PLAYER0! connectx.!PLAYER1!.!PLAYER1! -r 1 -t 1') DO (
 		:: F = Player, G = Score, H = Won, I = Lost, J = Draw, K = Error
 		if "!verbose!"=="true" (
@@ -49,6 +49,11 @@ for /f "delims=" %%a in (%input%) do (
             set /a lost0=!lost0!+%%I
             set /a draw0=!draw0!+%%J
             set /a error0=!error0!+%%K
+            if %%H == 1 (
+                echo [93m!PLAYER0! WIN[0m
+            ) else (
+                echo [91m!PLAYER1! WIN[0m
+            )
         )
         if "%%F" == "!PLAYER1!" (
             set /a score1=!score1!+%%G
@@ -59,7 +64,7 @@ for /f "delims=" %%a in (%input%) do (
 		)
 	)
 	REM Run the game PLAYER1! vs PLAYER0
-	echo - !PLAYER1! vs !PLAYER0! -
+	echo|set /p= "- !PLAYER1! vs !PLAYER0! - "
 	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER1!.!PLAYER1! connectx.!PLAYER0!.!PLAYER0! -r 1 -t 1') DO (
 		:: F = Player, G = Score, H = Won, I = Lost, J = Draw, K = Error
 		if "!verbose!"=="true" (
@@ -71,6 +76,11 @@ for /f "delims=" %%a in (%input%) do (
             set /a lost0=!lost0!+%%I
             set /a draw0=!draw0!+%%J
             set /a error0=!error0!+%%K
+            if %%H == 1 (
+                echo [93m!PLAYER0! WIN[0m
+            ) else (
+                echo [91m!PLAYER1! WIN[0m
+            )
         )
         if "%%F" == "!PLAYER1!" (
             set /a score1=!score1!+%%G
