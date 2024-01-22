@@ -53,8 +53,10 @@ for /f "delims=" %%a in (%input%) do (
                 echo [93m!PLAYER0! WIN[0m
             ) else if %%J == 1 (
                 echo [92mDRAW[0m
-            ) else (
+            ) else if %%I == 1 (
                 echo [91m!PLAYER1! WIN[0m
+            ) else (
+                echo [95mNot assigned[0m
             )
         )
         if "%%F" == "!PLAYER1!" (
@@ -82,8 +84,10 @@ for /f "delims=" %%a in (%input%) do (
                 echo [93m!PLAYER0! WIN[0m
             ) else if %%J == 1 (
                 echo [92mDRAW[0m
-            ) else (
+            ) else if %%I == 1 (
                 echo [91m!PLAYER1! WIN[0m
+            ) else (
+                echo [95mNot assigned[0m
             )
         )
         if "%%F" == "!PLAYER1!" (
