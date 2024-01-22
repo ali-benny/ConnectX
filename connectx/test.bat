@@ -51,6 +51,8 @@ for /f "delims=" %%a in (%input%) do (
             set /a error0=!error0!+%%K
             if %%H == 1 (
                 echo [93m!PLAYER0! WIN[0m
+            ) else if %%J == 1 (
+                echo [92mDRAW[0m
             ) else (
                 echo [91m!PLAYER1! WIN[0m
             )
@@ -78,6 +80,8 @@ for /f "delims=" %%a in (%input%) do (
             set /a error0=!error0!+%%K
             if %%H == 1 (
                 echo [93m!PLAYER0! WIN[0m
+            ) else if %%J == 1 (
+                echo [92mDRAW[0m
             ) else (
                 echo [91m!PLAYER1! WIN[0m
             )
