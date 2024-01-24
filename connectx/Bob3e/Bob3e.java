@@ -160,43 +160,81 @@ public class Bob3e implements CXPlayer {
         } else {
             //Rows score
             for (int i = 0; i < board.M; i++) {
-                int j=0;    // j is the starting column
-                while(j + board.X <= board.N){
-                    int count = 0;
+                for (int j = 0; j + board.X <= board.N; j++){
+                    int countP1 = 0;
+                    int countP2 = 0;
                     for (int k = 0; k < board.X; k++) {
                         if (board.cellState(i, j+k) == CXCellState.P1) {
-                            count++;
+                            countP1++;
                         } else if (board.cellState(i, j+k) == CXCellState.P2) {
-                            count--;
+                            countP2++;
                         }
                     }
-                    if (count > 0) {
-                        score += Math.pow(10, count);
-                    } else if (count < 0) {
-                        score -= Math.pow(10, -count);
+                    if (countP1 > 0 && countP2 == 0) {
+                        score += countP1 * countP1 * countP1;
+                    } else if (countP2 > 0 && countP1 == 0) {
+                        score -= countP2 * countP2 * countP2;
                     }
-                    j++;
                 }
             }
 
             //Columns score
             for (int j = 0; j < board.N; j++) {
-                int i=0;    // i is the starting row
-                while(i + board.X <= board.M){
-                    int count = 0;
+                for (int i = 0; i + board.X <= board.M; i++){
+                    int countP1 = 0;
+                    int countP2 = 0;
                     for (int k = 0; k < board.X; k++) {
                         if (board.cellState(i+k, j) == CXCellState.P1) {
-                            count++;
+                            countP1++;
                         } else if (board.cellState(i+k, j) == CXCellState.P2) {
-                            count--;
+                            countP2++;
                         }
                     }
-                    if (count > 0) {
-                        score += Math.pow(10, count);
-                    } else if (count < 0) {
-                        score -= Math.pow(10, -count);
+                    if (countP1 > 0 && countP2 == 0) {
+                        score += countP1 * countP1 * countP1;
+                    } else if (countP2 > 0 && countP1 == 0) {
+                        score -= countP2 * countP2 * countP2;
                     }
-                    i++;
+                }
+            }
+
+            //Diagonals score
+            for (int i = 0; i + board.X < board.M; i++) {
+                for (int j = 0; j + board.X < board.N; j++) {
+                    int countP1 = 0;
+                    int countP2 = 0;
+                    for (int k = 0; k < board.X; k++) {
+                        if (board.cellState(i+k, j+k) == CXCellState.P1) {
+                            countP1++;
+                        } else if (board.cellState(i+k, j+k) == CXCellState.P2) {
+                            countP2++;
+                        }
+                    }
+                    if (countP1 > 0 && countP2 == 0) {
+                        score += countP1 * countP1 * countP1;
+                    } else if (countP2 > 0 && countP1 == 0) {
+                        score -= countP2 * countP2 * countP2;
+                    }
+                }
+            }
+
+            // Anti-diagonals score
+            for (int i = 0; i + board.X < board.M; i++) {
+                for (int j = board.X - 1; j < board.N; j++) {
+                    int countP1 = 0;
+                    int countP2 = 0;
+                    for (int k = 0; k < board.X; k++) {
+                        if (board.cellState(i+k, j-k) == CXCellState.P1) {
+                            countP1++;
+                        } else if (board.cellState(i+k, j-k) == CXCellState.P2) {
+                            countP2++;
+                        }
+                    }
+                    if (countP1 > 0 && countP2 == 0) {
+                        score += countP1 * countP1 * countP1;
+                    } else if (countP2 > 0 && countP1 == 0) {
+                        score -= countP2 * countP2 * countP2;
+                    }
                 }
             }
         }
