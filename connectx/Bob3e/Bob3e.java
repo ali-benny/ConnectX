@@ -158,7 +158,7 @@ public class Bob3e implements CXPlayer {
         } else if (board.gameState() == CXGameState.DRAW){
             score = 0;
         } else {
-            //Rows score
+            // Rows score
             for (int i = 0; i < board.M; i++) {
                 for (int j = 0; j + board.X <= board.N; j++){
                     int countP1 = 0;
@@ -168,7 +168,13 @@ public class Bob3e implements CXPlayer {
                             countP1++;
                         } else if (board.cellState(i, j+k) == CXCellState.P2) {
                             countP2++;
-                        }
+                        } else if (board.cellState(i, j+k) == CXCellState.FREE) {
+                            if (k > 0 && board.cellState(i, j+k-1) == CXCellState.P1) {
+                                score += countP1; // Cella libera dopo combo P1 -> bonus per P1
+                            } else if (k > 0 && board.cellState(i, j+k-1) == CXCellState.P2) {
+                                score += countP2; // Cella libera dopo combo P2 -> score aumentato per favorire mossa che blocca P2
+                            }
+                        } 
                     }
                     if (countP1 > 0 && countP2 == 0) {
                         score += countP1 * countP1 * countP1;
@@ -178,7 +184,7 @@ public class Bob3e implements CXPlayer {
                 }
             }
 
-            //Columns score
+            // Columns score
             for (int j = 0; j < board.N; j++) {
                 for (int i = 0; i + board.X <= board.M; i++){
                     int countP1 = 0;
@@ -188,6 +194,12 @@ public class Bob3e implements CXPlayer {
                             countP1++;
                         } else if (board.cellState(i+k, j) == CXCellState.P2) {
                             countP2++;
+                        } else if (board.cellState(i+k, j) == CXCellState.FREE) {
+                            if (k > 0 && board.cellState(i+k-1, j) == CXCellState.P1) {
+                                score += countP1;
+                            } else if (k > 0 && board.cellState(i+k-1, j) == CXCellState.P2) {
+                                score += countP2;
+                            }
                         }
                     }
                     if (countP1 > 0 && countP2 == 0) {
@@ -198,7 +210,7 @@ public class Bob3e implements CXPlayer {
                 }
             }
 
-            //Diagonals score
+            // Diagonals score
             for (int i = 0; i + board.X < board.M; i++) {
                 for (int j = 0; j + board.X < board.N; j++) {
                     int countP1 = 0;
@@ -208,6 +220,12 @@ public class Bob3e implements CXPlayer {
                             countP1++;
                         } else if (board.cellState(i+k, j+k) == CXCellState.P2) {
                             countP2++;
+                        } else if (board.cellState(i+k, j+k) == CXCellState.FREE) {
+                            if (k > 0 && board.cellState(i+k-1, j+k-1) == CXCellState.P1) {
+                                score += countP1; 
+                            } else if (k > 0 && board.cellState(i+k-1, j+k-1) == CXCellState.P2) {
+                                score += countP2;
+                            }
                         }
                     }
                     if (countP1 > 0 && countP2 == 0) {
@@ -220,7 +238,7 @@ public class Bob3e implements CXPlayer {
 
             // Anti-diagonals score
             for (int i = 0; i + board.X < board.M; i++) {
-                for (int j = board.X - 1; j < board.N; j++) {
+                for (int j = board.X - 1; j < board.N; j++) {   // TODO: check for (...)
                     int countP1 = 0;
                     int countP2 = 0;
                     for (int k = 0; k < board.X; k++) {
@@ -228,6 +246,12 @@ public class Bob3e implements CXPlayer {
                             countP1++;
                         } else if (board.cellState(i+k, j-k) == CXCellState.P2) {
                             countP2++;
+                        } else if (board.cellState(i+k, j-k) == CXCellState.FREE) {
+                            if (k > 0 && board.cellState(i+k-1, j-k+1) == CXCellState.P1) {
+                                score += countP1;
+                            } else if (k > 0 && board.cellState(i+k-1, j-k+1) == CXCellState.P2) {
+                                score += countP2;
+                            }
                         }
                     }
                     if (countP1 > 0 && countP2 == 0) {
