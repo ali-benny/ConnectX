@@ -58,3 +58,600 @@ L1	 Score: 87, Won: 0, Lost: 31, Draw: 15, Error: 0
 Hope vs Bob4 Final results: 
 Hope	 Score: 112, Won: 28, Lost: 1, Draw: 22, Error: 17  
 Bob4	 Score: 76, Won: 1, Lost: 28, Draw: 22, Error: 2  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 59, Won: 6, Lost: 31, Draw: 29, Error: 0  
+Bob4	 Score: 122, Won: 31, Lost: 6, Draw: 29, Error: 4  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 47, Won: 1, Lost: 35, Draw: 29, Error: 0  
+Bob4	 Score: 134, Won: 35, Lost: 1, Draw: 29, Error: 5  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 45, Won: 4, Lost: 41, Draw: 21, Error: 0  
+Bob4	 Score: 144, Won: 41, Lost: 4, Draw: 21, Error: 4  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 54, Won: 5, Lost: 36, Draw: 24, Error: 0  
+Bob4	 Score: 132, Won: 36, Lost: 5, Draw: 24, Error: 5  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 48, Won: 2, Lost: 38, Draw: 24, Error: 0  
+Bob4	 Score: 138, Won: 38, Lost: 2, Draw: 24, Error: 6  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 59, Won: 4, Lost: 33, Draw: 26, Error: 0  
+Bob4	 Score: 125, Won: 33, Lost: 4, Draw: 26, Error: 7  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 50, Won: 3, Lost: 40, Draw: 20, Error: 0  
+Bob4	 Score: 140, Won: 40, Lost: 3, Draw: 20, Error: 7  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 55, Won: 2, Lost: 33, Draw: 28, Error: 0  
+Bob4	 Score: 127, Won: 33, Lost: 2, Draw: 28, Error: 7  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 52, Won: 2, Lost: 34, Draw: 28, Error: 0  
+Bob4	 Score: 130, Won: 34, Lost: 2, Draw: 28, Error: 6  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 50, Won: 2, Lost: 36, Draw: 26, Error: 0  
+Bob4	 Score: 134, Won: 36, Lost: 2, Draw: 26, Error: 6  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 46, Won: 1, Lost: 38, Draw: 25, Error: 0  
+Bob4	 Score: 139, Won: 38, Lost: 1, Draw: 25, Error: 6  
+============================== 
+L1 vs Hopeless Final results: 
+L1	 Score: 24, Won: 1, Lost: 50, Draw: 18, Error: 0  
+Hopeless	 Score: 168, Won: 50, Lost: 1, Draw: 18, Error: 1  
+============================== 
+Hopeless vs Bob4 Final results: 
+Hopeless	 Score: 146, Won: 32, Lost: 0, Draw: 32, Error: 0  
+Bob4	 Score: 32, Won: 0, Lost: 32, Draw: 32, Error: 6  
+============================== 
+L1 vs Bob4 Final results: 
+L1	 Score: 50, Won: 0, Lost: 34, Draw: 29, Error: 0  
+Bob4	 Score: 131, Won: 34, Lost: 0, Draw: 29, Error: 7  
+============================== 
+Bob4 vs Bob3 Final results: 
+Bob4	 Score: 90, Won: 1, Lost: 0, Draw: 54, Error: 4  
+Bob3	 Score: 66, Won: 0, Lost: 1, Draw: 54, Error: 11  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 130, Won: 35, Lost: 2, Draw: 25, Error: 8  
+L1	 Score: 55, Won: 2, Lost: 35, Draw: 25, Error: 0  
+============================== 
+Hope vs L1 Final results: 
+Hope	 Score: 169, Won: 51, Lost: 1, Draw: 16, Error: 2  
+L1	 Score: 25, Won: 1, Lost: 51, Draw: 16, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 83, Won: 19, Lost: 1, Draw: 26, Error: 24  
+L1	 Score: 101, Won: 1, Lost: 19, Draw: 26, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 104, Won: 24, Lost: 1, Draw: 32, Error: 13  
+L1	 Score: 74, Won: 1, Lost: 24, Draw: 32, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 94, Won: 23, Lost: 2, Draw: 25, Error: 20  
+L1	 Score: 91, Won: 2, Lost: 23, Draw: 25, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 115, Won: 28, Lost: 1, Draw: 31, Error: 10  
+L1	 Score: 64, Won: 1, Lost: 28, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 109, Won: 27, Lost: 0, Draw: 28, Error: 15  
+L1	 Score: 73, Won: 0, Lost: 27, Draw: 28, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 130, Won: 35, Lost: 1, Draw: 25, Error: 9  
+L1	 Score: 55, Won: 1, Lost: 35, Draw: 25, Error: 0  
+============================== 
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 118, Won: 29, Lost: 3, Draw: 31, Error: 7  
+L1	 Score: 61, Won: 3, Lost: 29, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 117, Won: 30, Lost: 6, Draw: 27, Error: 7  
+L1	 Score: 66, Won: 6, Lost: 30, Draw: 27, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 112, Won: 27, Lost: 7, Draw: 31, Error: 4  
+L1	 Score: 64, Won: 7, Lost: 27, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 121, Won: 31, Lost: 5, Draw: 28, Error: 6  
+L1	 Score: 61, Won: 5, Lost: 31, Draw: 28, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 99, Won: 22, Lost: 7, Draw: 33, Error: 8  
+L1	 Score: 78, Won: 7, Lost: 22, Draw: 33, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 104, Won: 26, Lost: 11, Draw: 26, Error: 7  
+L1	 Score: 80, Won: 11, Lost: 26, Draw: 26, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 105, Won: 25, Lost: 9, Draw: 30, Error: 6  
+L1	 Score: 75, Won: 9, Lost: 25, Draw: 30, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 116, Won: 29, Lost: 6, Draw: 29, Error: 6  
+L1	 Score: 65, Won: 6, Lost: 29, Draw: 29, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 104, Won: 25, Lost: 8, Draw: 29, Error: 8  
+L1	 Score: 77, Won: 8, Lost: 25, Draw: 29, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 90, Won: 22, Lost: 17, Draw: 24, Error: 7  
+L1	 Score: 96, Won: 17, Lost: 22, Draw: 24, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 106, Won: 25, Lost: 6, Draw: 31, Error: 8  
+L1	 Score: 73, Won: 6, Lost: 25, Draw: 31, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 105, Won: 26, Lost: 10, Draw: 27, Error: 7  
+L1	 Score: 78, Won: 10, Lost: 26, Draw: 27, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 103, Won: 25, Lost: 9, Draw: 28, Error: 8  
+L1	 Score: 79, Won: 9, Lost: 25, Draw: 28, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 116, Won: 30, Lost: 7, Draw: 26, Error: 7  
+L1	 Score: 68, Won: 7, Lost: 30, Draw: 26, Error: 0  
+============================== 
+Bob4 vs L1 Final results: 
+Bob4	 Score: 107, Won: 26, Lost: 8, Draw: 29, Error: 7  
+L1	 Score: 74, Won: 8, Lost: 26, Draw: 29, Error: 0  
+============================== 
+Bob42 vs Bob3 Final results: 
+Bob42	 Score: 76, Won: 0, Lost: 12, Draw: 46, Error: 2  
+Bob3	 Score: 88, Won: 12, Lost: 0, Draw: 46, Error: 10  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 107, Won: 27, Lost: 10, Draw: 26, Error: 7  
+L1	 Score: 77, Won: 10, Lost: 27, Draw: 26, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 93, Won: 20, Lost: 9, Draw: 33, Error: 8  
+L1	 Score: 84, Won: 9, Lost: 20, Draw: 33, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 105, Won: 24, Lost: 6, Draw: 33, Error: 6  
+L1	 Score: 69, Won: 6, Lost: 24, Draw: 33, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 22, Won: 0, Lost: 40, Draw: 22, Error: 8  
+L1	 Score: 166, Won: 40, Lost: 0, Draw: 22, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 12, Won: 4, Lost: 13, Draw: 0, Error: 53  
+L1	 Score: 198, Won: 13, Lost: 4, Draw: 0, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 12, Won: 4, Lost: 0, Draw: 0, Error: 66  
+L1	 Score: 198, Won: 0, Lost: 4, Draw: 0, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 94, Won: 21, Lost: 11, Draw: 31, Error: 7  
+L1	 Score: 85, Won: 11, Lost: 21, Draw: 31, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 87, Won: 18, Lost: 11, Draw: 33, Error: 8  
+L1	 Score: 90, Won: 11, Lost: 18, Draw: 33, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 65, Won: 18, Lost: 2, Draw: 11, Error: 39  
+L1	 Score: 134, Won: 2, Lost: 18, Draw: 11, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 66, Won: 16, Lost: 4, Draw: 18, Error: 32  
+L1	 Score: 126, Won: 4, Lost: 16, Draw: 18, Error: 0  
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 19, Won: 0, Lost: 43, Draw: 19, Error: 8  
+Hope	 Score: 172, Won: 43, Lost: 0, Draw: 19, Error: 0  
+============================== Using selectScore correctly
+Bob42 vs L1 Final results: 
+Bob42	 Score: 119, Won: 30, Lost: 4, Draw: 29, Error: 7  
+L1	 Score: 62, Won: 4, Lost: 30, Draw: 29, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 135, Won: 38, Lost: 4, Draw: 21, Error: 7  
+L1	 Score: 54, Won: 4, Lost: 38, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 126, Won: 34, Lost: 4, Draw: 24, Error: 8  
+L1	 Score: 60, Won: 4, Lost: 34, Draw: 24, Error: 0  
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 34, Won: 1, Lost: 32, Draw: 22, Error: 11  
+Hope	 Score: 151, Won: 32, Lost: 1, Draw: 22, Error: 3  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 118, Won: 30, Lost: 4, Draw: 28, Error: 8  
+L1	 Score: 64, Won: 4, Lost: 30, Draw: 28, Error: 0  
+============================== 
+L1 vs Bob42 Final results: 
+L1	 Score: 71, Won: 6, Lost: 25, Draw: 32, Error: 0  
+Bob42	 Score: 107, Won: 25, Lost: 6, Draw: 32, Error: 7  
+============================== 
+L1 vs Bob42 Final results: 
+L1	 Score: 63, Won: 2, Lost: 33, Draw: 24, Error: 0  
+Bob42	 Score: 123, Won: 33, Lost: 2, Draw: 24, Error: 11  
+============================== 
+L1 vs Bob42 Final results: 
+L1	 Score: 57, Won: 4, Lost: 30, Draw: 27, Error: 0  
+Bob42	 Score: 117, Won: 30, Lost: 4, Draw: 27, Error: 6  
+============================== 
+L1 vs Bob42 Final results: 
+L1	 Score: 63, Won: 1, Lost: 28, Draw: 30, Error: 0  
+Bob42	 Score: 114, Won: 28, Lost: 1, Draw: 30, Error: 10  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 126, Won: 32, Lost: 1, Draw: 30, Error: 7  
+L1	 Score: 54, Won: 1, Lost: 32, Draw: 30, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 115, Won: 28, Lost: 4, Draw: 31, Error: 7  
+L1	 Score: 64, Won: 4, Lost: 28, Draw: 31, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 122, Won: 30, Lost: 0, Draw: 32, Error: 8  
+L1	 Score: 56, Won: 0, Lost: 30, Draw: 32, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 119, Won: 31, Lost: 5, Draw: 26, Error: 8  
+L1	 Score: 65, Won: 5, Lost: 31, Draw: 26, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 116, Won: 30, Lost: 6, Draw: 26, Error: 8  
+L1	 Score: 68, Won: 6, Lost: 30, Draw: 26, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 108, Won: 26, Lost: 6, Draw: 30, Error: 8  
+L1	 Score: 72, Won: 6, Lost: 26, Draw: 30, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 129, Won: 35, Lost: 5, Draw: 24, Error: 6  
+L1	 Score: 57, Won: 5, Lost: 35, Draw: 24, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 109, Won: 26, Lost: 5, Draw: 31, Error: 8  
+L1	 Score: 70, Won: 5, Lost: 26, Draw: 31, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 126, Won: 33, Lost: 3, Draw: 27, Error: 7  
+L1	 Score: 57, Won: 3, Lost: 33, Draw: 27, Error: 0  
+============================== 
+Hope vs Bob42 Final results: 
+Hope	 Score: 165, Won: 41, Lost: 1, Draw: 21, Error: 0  
+Bob42	 Score: 24, Won: 1, Lost: 41, Draw: 21, Error: 7  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 114, Won: 28, Lost: 3, Draw: 30, Error: 9  
+L1	 Score: 66, Won: 3, Lost: 28, Draw: 30, Error: 0  
+============================== 
+Bob4 vs Bob3e Final results: 
+Bob4	 Score: 116, Won: 0, Lost: 15, Draw: 23, Error: 1  
+Bob3e	 Score: 71, Won: 15, Lost: 0, Draw: 23, Error: 31  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 111, Won: 0, Lost: 18, Draw: 21, Error: 1  
+Bob3e	 Score: 78, Won: 18, Lost: 0, Draw: 21, Error: 30  
+============================== 
+Bob3e vs L1 Final results: 
+Bob3e	 Score: 90, Won: 20, Lost: 0, Draw: 30, Error: 20  
+L1	 Score: 90, Won: 0, Lost: 20, Draw: 30, Error: 0  
+============================== 
+Bob3e vs Bob42 Final results: 
+Bob3e	 Score: 77, Won: 18, Lost: 0, Draw: 20, Error: 31  
+Bob42	 Score: 113, Won: 0, Lost: 18, Draw: 20, Error: 1  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 115, Won: 29, Lost: 5, Draw: 28, Error: 8  
+L1	 Score: 67, Won: 5, Lost: 29, Draw: 28, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 111, Won: 27, Lost: 5, Draw: 30, Error: 8  
+L1	 Score: 69, Won: 5, Lost: 27, Draw: 30, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 99, Won: 22, Lost: 7, Draw: 33, Error: 8  
+L1	 Score: 78, Won: 7, Lost: 22, Draw: 33, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 125, Won: 33, Lost: 3, Draw: 26, Error: 8  
+L1	 Score: 59, Won: 3, Lost: 33, Draw: 26, Error: 0  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 115, Won: 0, Lost: 12, Draw: 25, Error: 3  
+Bob3e	 Score: 70, Won: 12, Lost: 0, Draw: 25, Error: 30  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 108, Won: 0, Lost: 21, Draw: 18, Error: 1  
+Bob3e	 Score: 84, Won: 21, Lost: 0, Draw: 18, Error: 30  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 108, Won: 20, Lost: 21, Draw: 18, Error: 1  
+Bob3e	 Score: 84, Won: 21, Lost: 20, Draw: 18, Error: 10  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 108, Won: 20, Lost: 21, Draw: 18, Error: 1  
+Bob3e	 Score: 84, Won: 21, Lost: 20, Draw: 18, Error: 10  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 96, Won: 0, Lost: 21, Draw: 18, Error: 5  
+Bob3e	 Score: 96, Won: 21, Lost: 0, Draw: 18, Error: 26  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 99, Won: 0, Lost: 21, Draw: 18, Error: 4  
+Bob3e	 Score: 93, Won: 21, Lost: 0, Draw: 18, Error: 27  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 59, Won: 0, Lost: 32, Draw: 14, Error: 9  
+Bob3e	 Score: 137, Won: 32, Lost: 0, Draw: 14, Error: 15  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 43, Won: 8, Lost: 31, Draw: 19, Error: 12  
+L1	 Score: 148, Won: 31, Lost: 8, Draw: 19, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 65, Won: 14, Lost: 23, Draw: 23, Error: 10  
+L1	 Score: 122, Won: 23, Lost: 14, Draw: 23, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 44, Won: 6, Lost: 30, Draw: 26, Error: 8  
+L1	 Score: 140, Won: 30, Lost: 6, Draw: 26, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 42, Won: 6, Lost: 32, Draw: 24, Error: 8  
+L1	 Score: 144, Won: 32, Lost: 6, Draw: 24, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 49, Won: 8, Lost: 29, Draw: 25, Error: 8  
+L1	 Score: 136, Won: 29, Lost: 8, Draw: 25, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 46, Won: 9, Lost: 34, Draw: 19, Error: 8  
+L1	 Score: 145, Won: 34, Lost: 9, Draw: 19, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 53, Won: 9, Lost: 27, Draw: 26, Error: 8  
+L1	 Score: 131, Won: 27, Lost: 9, Draw: 26, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 51, Won: 10, Lost: 31, Draw: 21, Error: 8  
+L1	 Score: 138, Won: 31, Lost: 10, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 41, Won: 7, Lost: 27, Draw: 20, Error: 16  
+L1	 Score: 149, Won: 27, Lost: 7, Draw: 20, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 46, Won: 7, Lost: 24, Draw: 25, Error: 14  
+L1	 Score: 139, Won: 24, Lost: 7, Draw: 25, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 45, Won: 8, Lost: 33, Draw: 21, Error: 8  
+L1	 Score: 144, Won: 33, Lost: 8, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 55, Won: 11, Lost: 29, Draw: 22, Error: 8  
+L1	 Score: 133, Won: 29, Lost: 11, Draw: 22, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 57, Won: 12, Lost: 28, Draw: 21, Error: 9  
+L1	 Score: 132, Won: 28, Lost: 12, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 51, Won: 10, Lost: 31, Draw: 21, Error: 8  
+L1	 Score: 138, Won: 31, Lost: 10, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 44, Won: 8, Lost: 34, Draw: 20, Error: 8  
+L1	 Score: 146, Won: 34, Lost: 8, Draw: 20, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 99, Won: 25, Lost: 13, Draw: 24, Error: 8  
+L1	 Score: 87, Won: 13, Lost: 25, Draw: 24, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 91, Won: 23, Lost: 17, Draw: 22, Error: 8  
+L1	 Score: 97, Won: 17, Lost: 23, Draw: 22, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 90, Won: 21, Lost: 14, Draw: 27, Error: 8  
+L1	 Score: 93, Won: 14, Lost: 21, Draw: 27, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 30, Won: 6, Lost: 4, Draw: 12, Error: 48  
+L1	 Score: 168, Won: 4, Lost: 6, Draw: 12, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 35, Won: 7, Lost: 3, Draw: 14, Error: 46  
+L1	 Score: 161, Won: 3, Lost: 7, Draw: 14, Error: 0  
+============================== 
+Bob3e vs L1 Final results: 
+Bob3e	 Score: 96, Won: 22, Lost: 8, Draw: 30, Error: 10  
+L1	 Score: 84, Won: 8, Lost: 22, Draw: 30, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 37, Won: 8, Lost: 0, Draw: 13, Error: 49  
+L1	 Score: 160, Won: 0, Lost: 8, Draw: 13, Error: 0  
+============================== BOB42 depth and time management
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 75, Won: 18, Lost: 6, Draw: 21, Error: 25  
+L1	 Score: 114, Won: 6, Lost: 18, Draw: 21, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 54, Won: 8, Lost: 9, Draw: 30, Error: 23  
+L1	 Score: 126, Won: 9, Lost: 8, Draw: 30, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 81, Won: 20, Lost: 14, Draw: 21, Error: 7  
+L1	 Score: 84, Won: 14, Lost: 20, Draw: 21, Error: 0  
+============================== 
+Bob42 vs Bob4 Final results: 
+Bob42	 Score: 57, Won: 12, Lost: 22, Draw: 21, Error: 7  
+Bob4	 Score: 108, Won: 22, Lost: 12, Draw: 21, Error: 0  
+
+============================== BOB42 += combo avversario
+============================== 
+Bob42 vs Bob4 Final results: 
+Bob42	 Score: 62, Won: 13, Lost: 17, Draw: 20, Error: 19  
+Bob4	 Score: 128, Won: 17, Lost: 13, Draw: 20, Error: 1  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 78, Won: 19, Lost: 13, Draw: 21, Error: 17  
+L1	 Score: 111, Won: 13, Lost: 19, Draw: 21, Error: 0  
+
+============================== BOB42 bonus combo manca 1 pedina per vincere/perdere
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 85, Won: 22, Lost: 5, Draw: 19, Error: 24  
+L1	 Score: 106, Won: 5, Lost: 22, Draw: 19, Error: 0  
+
+============================== BOB42 depth-- a 3/4 del tempo============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 102, Won: 28, Lost: 4, Draw: 18, Error: 20  
+L1	 Score: 90, Won: 4, Lost: 28, Draw: 18, Error: 0  
+============================== 
+Bob42 vs Bob4 Final results: 
+Bob42	 Score: 66, Won: 12, Lost: 11, Draw: 27, Error: 19  
+Bob4	 Score: 117, Won: 11, Lost: 12, Draw: 27, Error: 1  
+============================== 
+Bob42 vs Kebabo Final results: 
+Bob42	 Score: 24, Won: 0, Lost: 29, Draw: 24, Error: 17  
+Kebabo	 Score: 162, Won: 29, Lost: 0, Draw: 24, Error: 0  
+============================== 
+Bob42 vs Bob4 Final results: 
+Bob42	 Score: 64, Won: 11, Lost: 9, Draw: 28, Error: 21  
+Bob4	 Score: 118, Won: 9, Lost: 11, Draw: 28, Error: 1  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 96, Won: 26, Lost: 5, Draw: 18, Error: 21  
+L1	 Score: 96, Won: 5, Lost: 26, Draw: 18, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 109, Won: 29, Lost: 1, Draw: 22, Error: 18  
+L1	 Score: 79, Won: 1, Lost: 29, Draw: 22, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 112, Won: 31, Lost: 3, Draw: 19, Error: 17  
+L1	 Score: 79, Won: 3, Lost: 31, Draw: 19, Error: 0  
+============================== 
+Bob42 vs Kebabo Final results: 
+Bob42	 Score: 38, Won: 3, Lost: 21, Draw: 29, Error: 17  
+Kebabo	 Score: 143, Won: 21, Lost: 3, Draw: 29, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 109, Won: 28, Lost: 1, Draw: 25, Error: 16  
+L1	 Score: 76, Won: 1, Lost: 28, Draw: 25, Error: 0  
+============================== throw new TimeoutException(); into if Timeout statement alpha-beta
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 130, Won: 36, Lost: 8, Draw: 22, Error: 4  
+L1	 Score: 58, Won: 8, Lost: 36, Draw: 22, Error: 0  
+============================== 
+Bob42 vs Kebabo Final results: 
+Bob42	 Score: 48, Won: 4, Lost: 26, Draw: 36, Error: 4  
+Kebabo	 Score: 126, Won: 26, Lost: 4, Draw: 36, Error: 0  
+============================== without if depth-=3;
+Bob42 vs L1 Final results: 
+Bob42	 Score: 97, Won: 24, Lost: 23, Draw: 19, Error: 2  
+L1	 Score: 94, Won: 23, Lost: 24, Draw: 19, Error: 2  
+============================== alpha/beta 4/5 & selcol 5/6
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 102, Won: 28, Lost: 26, Draw: 12, Error: 2  
+L1	 Score: 96, Won: 26, Lost: 28, Draw: 12, Error: 2  
+============================== 
+Bob42 vs Enzo Final results: 
+Bob42	 Score: 159, Won: 23, Lost: 5, Draw: 12, Error: 4  
+Enzo	 Score: 0, Won: 0, Lost: 0, Draw: 0, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 141, Won: 41, Lost: 6, Draw: 18, Error: 5  
+L1	 Score: 51, Won: 6, Lost: 41, Draw: 18, Error: 0  
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 75, Won: 11, Lost: 20, Draw: 33, Error: 3  
+Hope	 Score: 102, Won: 20, Lost: 11, Draw: 33, Error: 3  
+============================== 
+Bob3e vs CXOurPlayer Final results: 
+Bob3e	 Score: 52, Won: 10, Lost: 30, Draw: 22, Error: 8  
+CXOurPlayer	 Score: 0, Won: 0, Lost: 0, Draw: 0, Error: 0  
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 161, Won: 40, Lost: 5, Draw: 17, Error: 0  
+Bob3e	 Score: 32, Won: 5, Lost: 40, Draw: 17, Error: 8  
+============================== 
+Bob3e vs L5 Final results: 
+Bob3e	 Score: 86, Won: 21, Lost: 18, Draw: 23, Error: 8  
+L5	 Score: 101, Won: 18, Lost: 21, Draw: 23, Error: 0  
+============================== 
+Bob42 vs CXOurPlayer Final results: 
+Bob42	 Score: 104, Won: 26, Lost: 14, Draw: 26, Error: 4  
+CXOurPlayer	 Score: 0, Won: 0, Lost: 0, Draw: 0, Error: 0  
+============================== 
+Bob42 vs L5 Final results: 
+Bob42	 Score: 110, Won: 27, Lost: 8, Draw: 29, Error: 6  
+L5	 Score: 71, Won: 8, Lost: 27, Draw: 29, Error: 0  
+============================== ## IN CASE GO RANDOM AND 4/5 BREAK AND ALPHA BETA
+============================== 
+Bob42 vs Bob3e Final results: 
+Bob42	 Score: 158, Won: 38, Lost: 4, Draw: 20, Error: 0  
+Bob3e	 Score: 32, Won: 4, Lost: 38, Draw: 20, Error: 8  
+============================== 
+Bob42 vs Brucalippo Final results: 
+Bob42	 Score: 125, Won: 32, Lost: 5, Draw: 29, Error: 4  
+Brucalippo	 Score: 56, Won: 5, Lost: 32, Draw: 29, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 131, Won: 38, Lost: 11, Draw: 17, Error: 4  
+L1	 Score: 62, Won: 11, Lost: 38, Draw: 17, Error: 0  
+============================== 
+Bob42 vs CXOurPlayer Final results: 
+Bob42	 Score: 99, Won: 24, Lost: 15, Draw: 27, Error: 4  
+CXOurPlayer	 Score: 0, Won: 0, Lost: 0, Draw: 0, Error: 0  
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 68, Won: 9, Lost: 16, Draw: 41, Error: 4  
+Hope	 Score: 101, Won: 16, Lost: 9, Draw: 41, Error: 0  
+============================== 
+Bob42 vs Hopeless Final results: 
+Bob42	 Score: 55, Won: 5, Lost: 21, Draw: 40, Error: 4  
+Hopeless	 Score: 115, Won: 21, Lost: 5, Draw: 40, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 141, Won: 42, Lost: 9, Draw: 15, Error: 4  
+L1	 Score: 54, Won: 9, Lost: 42, Draw: 15, Error: 0  
+
+============================== Using LAST_TIME const as 3/4 or /2 for >=40
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 70, Won: 10, Lost: 18, Draw: 40, Error: 2  [in 50 50 10]
+Hope	 Score: 100, Won: 18, Lost: 10, Draw: 40, Error: 0  
+============================== N >= 40 ? TIMEOUT/(N >= 50? 3 : 2) : 3*TIMEOUT/4; ! dovrebbe fixare error in 50 50 10
+============================== 
+Bob42 vs Hopeless Final results: 
+Bob42	 Score: 57, Won: 6, Lost: 23, Draw: 39, Error: 2  
+Hopeless	 Score: 114, Won: 23, Lost: 6, Draw: 39, Error: 0  
+============================== 
+Bob42 vs L1 Final results: 
+Bob42	 Score: 143, Won: 41, Lost: 7, Draw: 20, Error: 2  
+L1	 Score: 47, Won: 7, Lost: 41, Draw: 20, Error: 0  
+============================== 
+Bob42 vs Hope Final results: 
+Bob42	 Score: 67, Won: 9, Lost: 19, Draw: 40, Error: 2  
+Hope	 Score: 103, Won: 19, Lost: 9, Draw: 40, Error: 0  
