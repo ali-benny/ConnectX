@@ -78,10 +78,11 @@ public class TheBob implements CXPlayer {
      *
      * @implNote Time complexity: O(1)
      */
-    private void checktimeout() throws TimeoutException {
+    private boolean checktimeout() throws TimeoutException {
         if (System.currentTimeMillis() - START >= (TIMEOUT * MAX_TIME) * 1000) {
             throw new TimeoutException();
         }
+        return false;
     }
 
     /**
@@ -171,7 +172,6 @@ public class TheBob implements CXPlayer {
                     depth -= 3;
             }} catch (TimeoutException e){}
             if (bestCol == -1){         // No winning move found
-                 // System.err.println("No winning move found/");
                 CXCell[] freeCells = getFreeCells(board);
                 depth = getFreeCells(board).length/2;
                 int bestScore = Integer.MIN_VALUE + 1;
@@ -183,8 +183,6 @@ public class TheBob implements CXPlayer {
                     board.markColumn(avlCol[i]);
                     int eval = alphaBeta_m(board, depth, alpha, beta);
                     board.unmarkColumn();
-                    // checktimeout();
-                    // System.err.print(board.gameState());
                     if (board.gameState() != yourWin){
                         if (board.gameState() == myWin || eval > bestScore){
                             bestCol = avlCol[i];
@@ -196,23 +194,18 @@ public class TheBob implements CXPlayer {
                         } 
                         if (bestScore == Integer.MIN_VALUE + 1 && i >= avlCol.length -1){
                             bestCol = selectSort(board, avlCol, i);
-                            // System.err.println("@"+bestCol);
                             if (bestScore == Integer.MIN_VALUE + 1 && maxFreeCell != -1 && board.markColumn(bestCol) == yourWin){
-                                // System.err.println("max: "+maxFreeCell+" best: "+bestCol);
                                 bestCol = maxFreeCell;
                             }
                             board.unmarkColumn();
                         }
-                        // System.err.println(avlCol[i]+" score: "+eval+" best: "+bestCol);
                     }
                     if (depth > 0) depth -= 2;
                     else break;
                 }
                 } catch (TimeoutException e) {
-                    if (bestCol == -1 || board.fullColumn(bestCol)) { // bestCol could be illigal move
-                        // System.err.println("using random col");
+                    if (bestCol == -1 || board.fullColumn(bestCol))        // bestCol could be illigal move
                         return avlCol[Math.abs(new Random().nextInt()) % avlCol.length];    
-                    }
                 }
             }
         }
@@ -246,7 +239,6 @@ public class TheBob implements CXPlayer {
         }
         return maxFreeCellsColumn;
     }
-
     
     /**
      * The getFreeCells function returns an array of all the free cells on the board.
@@ -281,16 +273,14 @@ public class TheBob implements CXPlayer {
      * @implNote Time complexity: O(n*depth)
      */
     private int alphaBeta_M(CXBoard board, int depth, int alpha, int beta) throws TimeoutException {
-        try {
-
+        // try {
             int transpositionScore = searchTranspositionTable(board);
             if (transpositionScore != Integer.MIN_VALUE +1) {       // If the score is already in the transposition table, return it
                 return transpositionScore;
             }
             if (depth <= 0 || board.gameState() != CXGameState.OPEN) // If the depth is 0 or the game is over, return the evaluation
                 return evaluate(board);
-            checktimeout();        // manca 1% del timeout
-            if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
+            if (!checktimeout() && System.currentTimeMillis() - START >= LAST_TIME * 1000)
                 throw new TimeoutException();
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
@@ -305,8 +295,8 @@ public class TheBob implements CXPlayer {
             }
             saveTranspositionTable(board, alpha);
             return alpha;
-        } catch (TimeoutException e) {}
-        return evaluate(board);
+        // } catch (TimeoutException e) {}
+        // return evaluate(board);
     }
 
     /**
@@ -321,16 +311,14 @@ public class TheBob implements CXPlayer {
      * @implNote Time complexity: O(n*depth)
      */
     private int alphaBeta_m(CXBoard board, int depth, int alpha, int beta) throws TimeoutException {
-        try {
-
+        
             int transpositionScore = searchTranspositionTable(board);
             if (transpositionScore != Integer.MIN_VALUE+1) {            // If the score is already in the transposition table, return it
                 return transpositionScore;
             }
             if (depth <= 0 || board.gameState() != CXGameState.OPEN)    // I'm at the root of the tree or the game is over, return the evaluation
                 return evaluate(board);
-            checktimeout();        // manca 1% del timeout
-            if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
+            if (!checktimeout() && System.currentTimeMillis() - START >= LAST_TIME * 1000)
                 throw new TimeoutException();
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
@@ -345,8 +333,7 @@ public class TheBob implements CXPlayer {
             }   
             saveTranspositionTable(board, beta);
             return beta;
-        } catch (TimeoutException e) {}
-        return evaluate(board);     // O(m*n*x)
+        // return evaluate(board);     // O(m*n*x)
     }
 
     /**
@@ -414,6 +401,7 @@ public class TheBob implements CXPlayer {
         }
         return score;
     }
+
     /**
      * The handlePownCombo function is used to count the number of pawns in a row, and the number of consecutive rows.
      * 
@@ -442,7 +430,6 @@ public class TheBob implements CXPlayer {
             combo[lastPown] = 1;
         }
     }
-
     
     /**
      * The scoreCount function takes in two arrays, pown and combo.
@@ -487,7 +474,6 @@ public class TheBob implements CXPlayer {
         return score;
     }
     
-    
     /**
      * The evalRow function evaluates the score of a row.
      * 
@@ -501,7 +487,7 @@ public class TheBob implements CXPlayer {
     public int evalRow(CXBoard board, int row){
         int score = 0;  
         int lastPown = 2;               // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
-        int[] pown = new int[3];        //numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
+        int[] pown = new int[3];        // numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
         int[] combocount = new int[2];  // numero di combo - [combo[0] = combo mio, combo[1] = combo avversario]
 
         for (int i=0; i+board.X < board.N; i++){
@@ -523,7 +509,6 @@ public class TheBob implements CXPlayer {
         score += scoreCount(pown, combocount);
         return score*score*score;
     }
-
     
     /**
      * The evalCol function evaluates the score of a column.
@@ -538,7 +523,7 @@ public class TheBob implements CXPlayer {
     private int evalCol(CXBoard board, int col){
         int score = 0;  
         int lastPown = 2;               // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
-        int[] pown = new int[3];        //numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
+        int[] pown = new int[3];        // numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
         int[] combocount = new int[2];  // numero di combo - [combo[0] = combo mio, combo[1] = combo avversario]
 
         for (int i=0; i+ board.X < board.M; i++){
@@ -560,7 +545,6 @@ public class TheBob implements CXPlayer {
         score += scoreCount(pown, combocount);
         return score*score*score;
     }
-
     
     /**
      * The evalDiag function evaluates the board by checking for diagonal lines of length X.
@@ -578,7 +562,7 @@ public class TheBob implements CXPlayer {
         int invcol = inverse ? board.N : 0;
         int score = 0;
         int lastPown = 2;               // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
-        int[] pown = new int[3];        //numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
+        int[] pown = new int[3];        // numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
         int[] combocount = new int[2];  // numero di combo - [combo[0] = combo mio, combo[1] = combo avversario]
 
         for (int row = invrow; row + board.X <= board.M - invrow; row++){
