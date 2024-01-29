@@ -1,4 +1,8 @@
 ============================== 
+Bob vs L1 Final results: 
+Bob	 Score: 85, Won: 18, Lost: 4, Draw: 31, Error: 17  
+L1	 Score: 94, Won: 4, Lost: 18, Draw: 31, Error: 0  
+============================== 
 Bob4 vs L1 Final results: 
 Bob4	 Score: 87, Won: 17, Lost: 0, Draw: 36, Error: 17  
 L1	 Score: 87, Won: 0, Lost: 17, Draw: 36, Error: 0  
@@ -14,6 +18,10 @@ Hope	 Score: 181, Won: 0, Lost: 0, Draw: 13, Error: 0
 Bob4 vs Hope Final results: 
 Bob4	 Score: 14, Won: 0, Lost: 1, Draw: 14, Error: 55  
 Hope	 Score: 182, Won: 1, Lost: 0, Draw: 14, Error: 0  
+============================== 
+Bob vs L1 Final results: 
+Bob	 Score: 75, Won: 14, Lost: 6, Draw: 33, Error: 17  
+L1	 Score: 102, Won: 6, Lost: 14, Draw: 33, Error: 0  
 ============================== 
 Bob4 vs L1 Final results: 
 Bob4	 Score: 86, Won: 17, Lost: 0, Draw: 35, Error: 18  
@@ -655,3 +663,47 @@ L1	 Score: 47, Won: 7, Lost: 41, Draw: 20, Error: 0
 Bob42 vs Hope Final results: 
 Bob42	 Score: 67, Won: 9, Lost: 19, Draw: 40, Error: 2  
 Hope	 Score: 103, Won: 19, Lost: 9, Draw: 40, Error: 0  
+============================== 
+Bob43 vs L1 Final results: 
+Bob43	 Score: 102, Won: 28, Lost: 2, Draw: 18, Error: 22  
+L1	 Score: 90, Won: 2, Lost: 28, Draw: 18, Error: 0  
+============================== 
+Bob42 vs Bob422 Final results: 
+Bob42	 Score: 106, Won: 26, Lost: 14, Draw: 28, Error: 2  
+Bob422	 Score: 76, Won: 14, Lost: 26, Draw: 28, Error: 0  
+============================== 
+Bob422 vs L1 Final results: 
+Bob422	 Score: 115, Won: 32, Lost: 19, Draw: 19, Error: 0  
+L1	 Score: 76, Won: 19, Lost: 32, Draw: 19, Error: 0  
+============================== 
+Bob2 vs L1 Final results: 
+Bob2	 Score: 31, Won: 8, Lost: 1, Draw: 7, Error: 54  
+L1	 Score: 172, Won: 1, Lost: 8, Draw: 7, Error: 0  
+============================== 
+TheBob vs L1 Final results: 
+TheBob	 Score: 150, Won: 45, Lost: 8, Draw: 15, Error: 2  
+L1	 Score: 45, Won: 8, Lost: 45, Draw: 15, Error: 0  
+============================== 
+TheBob vs Hope Final results: 
+TheBob	 Score: 71, Won: 10, Lost: 17, Draw: 41, Error: 2  
+Hope	 Score: 98, Won: 17, Lost: 10, Draw: 41, Error: 0  
+============================== 
+TheBob vs Kebabo Final results: 
+TheBob	 Score: 45, Won: 4, Lost: 31, Draw: 33, Error: 2  
+Kebabo	 Score: 132, Won: 31, Lost: 4, Draw: 33, Error: 0  
+============================== 
+TheBob vs Hopeless Final results: 
+TheBob	 Score: 58, Won: 6, Lost: 22, Draw: 40, Error: 2  
+Hopeless	 Score: 112, Won: 22, Lost: 6, Draw: 40, Error: 0  
+============================== 
+TheBob vs L1 Final results: 
+TheBob	 Score: 133, Won: 37, Lost: 9, Draw: 22, Error: 2  
+L1	 Score: 55, Won: 9, Lost: 37, Draw: 22, Error: 0  
+============================== 
+TheBob vs L1 Final results: 
+TheBob	 Score: 138, Won: 39, Lost: 8, Draw: 21, Error: 2  
+L1	 Score: 51, Won: 8, Lost: 39, Draw: 21, Error: 0  
+============================== 
+Hope vs Hopeless Final results: 
+Hope	 Score: 86, Won: 15, Lost: 13, Draw: 41, Error: 1  
+Hopeless	 Score: 83, Won: 13, Lost: 15, Draw: 41, Error: 0  

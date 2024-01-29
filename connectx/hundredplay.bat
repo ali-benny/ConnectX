@@ -14,11 +14,6 @@ REM Define the players
 set "PLAYER0=%~1"
 set "PLAYER1=%~2"
 
-set verbose=false
-if "%~3"=="true" (
-	set verbose=true
-)
-
 set /a score0=0
 set /a score1=0
 set /a won0=0
@@ -38,7 +33,7 @@ for /f "delims=" %%a in (%input%) do (
 	echo [36mTesting %%a[0m
 	REM Run the game PLAYER0 vs PLAYER1
 	echo|set /p= "- !PLAYER0! vs !PLAYER1! - "
-	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER0!.!PLAYER0! connectx.!PLAYER1!.!PLAYER1! -r 1 -t 10') DO (
+	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER0!.!PLAYER0! connectx.!PLAYER1!.!PLAYER1! -r 10 -t 10') DO (
 		:: F = Player, G = Score, H = Won, I = Lost, J = Draw, K = Error
         if "%%F" == "!PLAYER0!" (
             set /a score0=!score0!+%%G
@@ -67,10 +62,22 @@ for /f "delims=" %%a in (%input%) do (
             echo %%F Score: %%G, Won: %%H, Lost: %%I, Draw: %%J, Error: %%K
         )
 	)
+
+    REM Print the final result
+echo ==============================
+echo [92mFinal results:[0m
+echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0! 
+echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1! 
+
+echo ============================== >> hundredResults.txt
+echo !PLAYER0! vs !PLAYER1! Final results: >> hundredResults.txt
+echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0!  >> hundredResults.txt
+echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1!  >> hundredResults.txt
+
 	REM Run the game PLAYER1! vs PLAYER0
     echo.
 	echo|set /p= "- !PLAYER1! vs !PLAYER0! - "
-	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER1!.!PLAYER1! connectx.!PLAYER0!.!PLAYER0! -r 1 -t 10') DO (
+	FOR /F "tokens=1,3,5,7,9,11 delims=: " %%F IN ('java -cp ".." connectx.CXPlayerTester %%a connectx.!PLAYER1!.!PLAYER1! connectx.!PLAYER0!.!PLAYER0! -r 10 -t 10') DO (
 		:: F = Player, G = Score, H = Won, I = Lost, J = Draw, K = Error
         if "%%F" == "!PLAYER1!" (
             set /a score1=!score1!+%%G
@@ -110,7 +117,7 @@ echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Erro
 @echo off
 PowerShell -Command "Write-Host `a"
 
-echo ============================== >> results.txt
-echo !PLAYER0! vs !PLAYER1! Final results: >> results.txt
-echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0!  >> results.txt
-echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1!  >> results.txt
+echo ============================== >> hundredResults.txt
+echo !PLAYER1! vs !PLAYER0! Final results: >> hundredResults.txt
+echo !PLAYER0!	 Score: !score0!, Won: !won0!, Lost: !lost0!, Draw: !draw0!, Error: !error0!  >> hundredResults.txt
+echo !PLAYER1!	 Score: !score1!, Won: !won1!, Lost: !lost1!, Draw: !draw1!, Error: !error1!  >> hundredResults.txt
