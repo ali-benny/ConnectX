@@ -1,0 +1,48 @@
+============================== 
+Bob vs L0 Final results: 
+L0	 Score: 50, Won: 0, Lost: 44, Draw: 14, Error: 0  
+Bob	 Score: 146, Won: 44, Lost: 0, Draw: 14, Error: 12  
+============================== 
+Bob vs L1 Final results: 
+L1	 Score: 92, Won: 7, Lost: 18, Draw: 32, Error: 0  
+Bob	 Score: 86, Won: 18, Lost: 7, Draw: 32, Error: 13  
+============================== 
+Bob2 vs L0 Final results: 
+L0	 Score: 87, Won: 0, Lost: 39, Draw: 3, Error: 0  
+Bob2	 Score: 120, Won: 39, Lost: 0, Draw: 3, Error: 28  
+============================== 
+Bob2 vs L1 Final results: 
+L1	 Score: 183, Won: 0, Lost: 5, Draw: 6, Error: 0  
+Bob2	 Score: 21, Won: 5, Lost: 0, Draw: 6, Error: 59  
+============================== 
+Bob3 vs L0 Final results: 
+L0	 Score: 33, Won: 0, Lost: 53, Draw: 9, Error: 0  
+Bob3	 Score: 168, Won: 53, Lost: 0, Draw: 9, Error: 8  
+============================== 
+Bob3 vs L1 Final results: 
+L1	 Score: 68, Won: 0, Lost: 30, Draw: 26, Error: 0  
+Bob3	 Score: 116, Won: 30, Lost: 0, Draw: 26, Error: 14  
+============================== 
+Bob31 vs L0 Final results: 
+L0	 Score: 55, Won: 8, Lost: 47, Draw: 7, Error: 0  
+Bob31	 Score: 148, Won: 47, Lost: 8, Draw: 7, Error: 8  
+============================== 
+Bob31 vs L1 Final results: 
+L1	 Score: 117, Won: 23, Lost: 15, Draw: 24, Error: 0  
+Bob31	 Score: 69, Won: 15, Lost: 23, Draw: 24, Error: 8  
+============================== 
+Bob3e vs L0 Final results: 
+L0	 Score: 43, Won: 1, Lost: 45, Draw: 16, Error: 0  
+Bob3e	 Score: 151, Won: 45, Lost: 1, Draw: 16, Error: 8  
+============================== 
+Bob3e vs L1 Final results: 
+L1	 Score: 83, Won: 11, Lost: 25, Draw: 26, Error: 0  
+Bob3e	 Score: 101, Won: 25, Lost: 11, Draw: 26, Error: 8  
+============================== 
+Bob4 vs L0 Final results: 
+L0	 Score: 30, Won: 2, Lost: 50, Draw: 15, Error: 0  
+Bob4	 Score: 165, Won: 50, Lost: 2, Draw: 15, Error: 3  
+============================== 
+Bob4 vs L1 Final results: 
+L1	 Score: 63, Won: 4, Lost: 29, Draw: 30, Error: 0  
+Bob4	 Score: 117, Won: 29, Lost: 4, Draw: 30, Error: 7  
