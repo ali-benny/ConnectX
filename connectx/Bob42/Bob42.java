@@ -2,6 +2,7 @@ package connectx.Bob42;
 
 import java.util.concurrent.TimeoutException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,9 @@ public class Bob42 implements CXPlayer {
     private long START;
     private long[][][] zobristTable; // Zobrist table for hashing
     private Map<Long, Integer> transpositionTable;
-    public Integer[] moveOrder;
-
+    private Integer[] moveOrder;
+    private int LAST_TIME; //
+    private double MAX_TIME;
     public Bob42() {
     }
 
@@ -40,7 +42,10 @@ public class Bob42 implements CXPlayer {
 
         TIMEOUT = timeout_in_secs;
         START = System.currentTimeMillis(); // Save starting time
+        LAST_TIME = N >= 40 ? TIMEOUT/2 : 3*TIMEOUT/4;
+        MAX_TIME = N >= 40 ? (98.0 / 100.0) : (99.0 / 100.0);  // 90% del tempo per N >= 40, 99% per N < 40
 
+        // move ordering
         moveOrder = new Integer[N];
         for (int i = 0; i < N; i++) {
             moveOrder[i] = N/2 + (i % 2 == 0 ? i/2 : -i/2 - 1); // i=0, moveOrder[0]=N/2, moveOrder[1]=N/2 -1, moveOrder[2]=N/2 +1, moveOrder[3]=N/2 -2, moveOrder[4]=N/2 +2, ...
@@ -60,9 +65,47 @@ public class Bob42 implements CXPlayer {
 
     // Check if the time is over
     private void checktimeout() throws TimeoutException {
-        if (System.currentTimeMillis() - START > TIMEOUT * 1000) {
+        if (System.currentTimeMillis() - START >= (TIMEOUT * MAX_TIME) * 1000) {
             throw new TimeoutException();
         }
+    }
+
+    /**
+     * The selectSort function is a selection sort algorithm that sorts the available columns in descending order.
+     * 
+     *
+     * @param board Mark and unmark columns
+     * @param avlCol Store the columns that are available to be played
+     * @param start Tell the function where to start from in the array
+     *
+     * @return The index of the maximum value in the array
+     */
+    public int selectSort(CXBoard board, Integer[] avlCol, int start){
+        int maxIndex = start;
+        long max = Integer.MIN_VALUE + 1;
+        if (!board.fullColumn(avlCol[start])) {
+            board.markColumn(avlCol[start]);
+            max = searchTranspositionTable(board);
+            board.unmarkColumn();
+        }  
+        try {
+        for(int i = start+1; i < avlCol.length; i++) {
+            checktimeout();
+            if (!board.fullColumn(avlCol[i])) {
+                board.markColumn(avlCol[i]);
+                long val = searchTranspositionTable(board);
+                board.unmarkColumn();
+                if(val > max) {
+                    maxIndex = i;
+                    max = val;
+                }
+            }
+        }
+        } catch (TimeoutException e) {}
+        int tmp = avlCol[start];         // mette in testa il valore maggiore trovato
+        avlCol[start] = avlCol[maxIndex];
+        avlCol[maxIndex] = tmp;
+        return avlCol[start];
     }
 
     public int selectColumn(CXBoard board) {
@@ -72,7 +115,7 @@ public class Bob42 implements CXPlayer {
         int alpha = Integer.MIN_VALUE + 1;      //! Deve esserci il +1 altrimenti non sono opposti
         int beta = Integer.MAX_VALUE;
         Integer[] avlCol = board.getAvailableColumns();
-        int depth = avlCol.length; 
+        int depth = getFreeCells(board).length >= 35 ? 20 : getFreeCells(board).length;
 
         if (board.numOfFreeCells() == 0) {  // The board is full, the game is a draw
             System.err.println("The board is full, the game is a draw");
@@ -84,63 +127,98 @@ public class Bob42 implements CXPlayer {
             board.unmarkColumn();
             return moveOrder[0];
         } else {
+            while (depth >= getFreeCells(board).length){
             for (int i = 0; i < board.N; i++) {
                 if (!board.fullColumn(moveOrder[i])) { // If the middlest column is not full
-                    board.markColumn(moveOrder[i]);
+                    int col = selectSort(board, moveOrder, i);
+                    board.markColumn(col);
                     if (board.gameState() == myWin){           // se fa vincere il giocatore, termina ritornando la colonna corrente
+                    // System.err.println("W"+evaluate(board));
                         board.unmarkColumn();
-                        return moveOrder[i];
+                        return col;
                     }
                     int eval = alphaBeta_m(board, depth, alpha, beta);
                     if (eval > alpha) {
                         alpha = eval;
-                        bestCol = moveOrder[i];
+                        bestCol = col;
                     }
+                    // System.err.println("eval "+eval+" ? "+board.gameState());
                     board.unmarkColumn();
                 }
-                depth++;
+            }
+            depth--;
+                if (System.currentTimeMillis() - START > 4*TIMEOUT/5 * 1000)  // se 1/4 del tempo
+                    break;
+                if (System.currentTimeMillis() - START > TIMEOUT/2 * 1000)  // ho 3/4 del tempo a disposizione
+                    depth -= 3;
             }
             if (bestCol == -1){         // No winning move found
-                System.err.println("No winning move found");
+                 // System.err.println("No winning move found/");
                 CXCell[] freeCells = getFreeCells(board);
-                depth = board.getAvailableColumns().length;
-                int lastScore = Integer.MIN_VALUE + 1;
-                for (int i=0; i<freeCells.length; i++){ // If the middlest column is full, search for the first free cell in the moveOrder array (from the middlest column to the sides
-                    try{
-                        checktimeout();
-                        for (CXCell cell : freeCells) {
-                            board.markColumn(cell.j);
-                            if (board.gameState() == myWin){           // se fa vincere il giocatore, termina ritornando la colonna corrente
-                                board.unmarkColumn();
-                                return cell.j;
-                            }                             
-                            int eval = alphaBeta_m(board, depth, alpha, beta);
-                            if (eval > lastScore){
-                                bestCol = cell.j;
-                                lastScore = eval;
+                depth = getFreeCells(board).length/2;
+                int bestScore = Integer.MIN_VALUE + 1;
+                avlCol = board.getAvailableColumns();
+                int maxFreeCell = maxColFreeCells(board, freeCells, avlCol);
+
+                try { 
+                for (int i=0; i<avlCol.length; i++){ // If the middlest column is full, search for the first free cell in the moveOrder array (from the middlest column to the sides                    
+                    board.markColumn(avlCol[i]);
+                    int eval = alphaBeta_m(board, depth, alpha, beta);
+                    board.unmarkColumn();
+                    checktimeout();
+                    // System.err.print(board.gameState());
+                    if (board.gameState() != yourWin){
+                        if (board.gameState() == myWin || eval > bestScore){
+                            bestCol = avlCol[i];
+                            alpha = alpha > eval ? eval : alpha;
+                            bestScore = eval;        
+                        } else if (bestScore == eval){
+                            if (board.gameState() != yourWin || board.gameState() == myWin)
+                                bestCol = avlCol[i];    
+                        } 
+                        if (bestScore == Integer.MIN_VALUE + 1 && i >= avlCol.length -1){
+                            bestCol = selectSort(board, avlCol, i);
+                            // System.err.println("@"+bestCol);
+                            if (bestScore == Integer.MIN_VALUE + 1 && maxFreeCell != -1 && board.markColumn(bestCol) == yourWin){
+                                // System.err.println("max: "+maxFreeCell+" best: "+bestCol);
+                                bestCol = maxFreeCell;
                             }
-                            else if (i >= freeCells.length && bestCol == -1){
-                                bestCol = cell.j;
-                            } else if (lastScore >= eval){
-                                // System.err.printf(" L ");
-                                bestCol = freeCells[i].j;                                
-                            } else
-                                lastScore = eval;
                             board.unmarkColumn();
                         }
-                        depth++;
-                    } catch (TimeoutException e) {
-                        System.err.printf("~Timeout~");
-                        return bestCol;
+                        // System.err.println(avlCol[i]+" score: "+eval+" best: "+bestCol);
+                    }
+                    if (depth > 0) depth -= 2;
+                    else break;
+                }
+                } catch (TimeoutException e) {
+                    if (bestCol == -1 || board.fullColumn(bestCol)) { // bestCol could be illigal move
+                        // System.err.println("using random col");
+                        return avlCol[Math.abs(new Random().nextInt()) % avlCol.length];    
                     }
                 }
-        System.err.println("Best column: "+bestCol);
+                // System.err.println("Best column: "+bestCol);
             }
         }
         return bestCol;
     }
 
-    public CXCell[] getFreeCells(CXBoard board) {
+ private int maxColFreeCells(CXBoard board, CXCell[] freeCells, Integer[] column){
+        int[] freeCellsXCol = new int[column.length];
+        int maxFreeCells = 0;
+        int maxFreeCellsColumn = -1;
+        for (int i=0; i < column.length; i++){
+            for (int j=0; j < freeCells.length; j++)
+                if (freeCells[j].j == column[i] && !board.fullColumn(freeCells[j].j))
+                    freeCellsXCol[i]++;
+            if (freeCellsXCol[i] > maxFreeCells) {
+                maxFreeCells = freeCellsXCol[i];
+                maxFreeCellsColumn = column[i];
+            }
+        }
+        return maxFreeCellsColumn;
+    }
+
+    private CXCell[] getFreeCells(CXBoard board) {
         List<CXCell> freeCells = new ArrayList<>();
         for (int i = 0; i < board.M; i++) {
             for (int j = 0; j < board.N; j++) {
@@ -149,7 +227,6 @@ public class Bob42 implements CXPlayer {
                 }
             }
         }
-        System.err.println("Free cells: "+freeCells.size());
         return freeCells.toArray(new CXCell[freeCells.size()]);
     }
 
@@ -164,16 +241,16 @@ public class Bob42 implements CXPlayer {
      */
     private int alphaBeta_M(CXBoard board, int depth, int alpha, int beta) {
         try {
-            checktimeout();
 
             int transpositionScore = searchTranspositionTable(board);
             if (transpositionScore != Integer.MIN_VALUE +1) { // If the score is already in the transposition table, return it
                 return transpositionScore;
             }
-            if (depth == 0 || board.gameState() != CXGameState.OPEN) // If the depth is 0 or the game is over, return the evaluation
+            if (depth <= 0 || board.gameState() != CXGameState.OPEN) // If the depth is 0 or the game is over, return the evaluation
                 return evaluate(board);
-            if (depth >= 8)
-                depth = depth/5;
+            if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
+                throw new TimeoutException();
+            else checktimeout();        // manca 1% del timeout
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
                     board.markColumn(moveOrder[col]);
@@ -187,12 +264,8 @@ public class Bob42 implements CXPlayer {
             }
             saveTranspositionTable(board, alpha); // Save the score in the transposition table
             return alpha;
-        } catch (TimeoutException e) {
-            int eval = evaluate(board);
-            saveTranspositionTable(board, eval);
-            System.err.printf("$");
-            return eval;
-        }
+        } catch (TimeoutException e) {}
+        return evaluate(board);
     }
 
     /**
@@ -206,16 +279,16 @@ public class Bob42 implements CXPlayer {
      */
     private int alphaBeta_m(CXBoard board, int depth, int alpha, int beta) {
         try {
-            checktimeout();
 
             int transpositionScore = searchTranspositionTable(board);
             if (transpositionScore != Integer.MIN_VALUE+1) {
                 return transpositionScore;
             }
-            if (depth == 0 || board.gameState() != CXGameState.OPEN)
+            if (depth <= 0 || board.gameState() != CXGameState.OPEN)
                 return evaluate(board);
-            if (depth >= 8)
-                depth = depth/5;
+            if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
+                throw new TimeoutException();
+            else checktimeout();        // manca 1% del timeout
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
                     board.markColumn(moveOrder[col]);
@@ -229,12 +302,8 @@ public class Bob42 implements CXPlayer {
             }
             saveTranspositionTable(board, beta);
             return beta;
-        } catch (TimeoutException e) {// Handle the timeout exception here
-            int eval = evaluate(board);
-            saveTranspositionTable(board, eval);
-        System.err.printf("¬");
-            return eval;
-        }
+        } catch (TimeoutException e) {}
+        return evaluate(board);
     }
 
     /**
@@ -263,16 +332,55 @@ public class Bob42 implements CXPlayer {
             for (int i = 0; i < board.N; i++) {
                 score += evalCol(board, i);
             }
-            score += evalDiag(board, false);
-            // System.err.printf(" E");
+            score += evalDiag(board, false);            
             score += evalDiag(board, true);
-        // System.err.printf("_");
             return score;
         }
     }
 
+            /** AUXILIAR FUNCTIONS FOR EVALUATE **/
+    
+    /**
+     * The tryYourNextMove function is a helper function that simulates the opponent's next move.
+     * It returns the score of the board after your opponent makes their next move.
+     * 
+     * @see #evaluate(CXBoard)
+     *
+     * @param board Access the board
+     * @param row Determine the row of the cell on which to place a pawn
+     * @param col Specify the column of the cell to be checked
+     * @param pown Store the number of powns that each player has
+     * @param combocount Store the number of combos that have been made
+     *
+     * @return potential score of the opponent's next move
+     */
+    private int tryYourNextMove(CXBoard board, int row, int col, int[] pown, int[] combocount){
+        CXCellState cell = board.cellState(row, col);
+        int score = 0;
+        if (cell == CXCellState.FREE) {
+            // Simulate opponent's move
+            int[] pownCopy = Arrays.copyOf(pown, pown.length);
+            int[] comboCopy = Arrays.copyOf(combocount, combocount.length);
+            handlePownCombo(1, pownCopy, 2, comboCopy);
+
+            // Evaluate potential score
+            score = scoreCount(pownCopy, comboCopy);
+        }
+        return score;
+    }
+    /**
+     * The handlePownCombo function is used to count the number of pawns in a row, and the number of consecutive rows.
+     * 
+     * @see #evaluate(CXBoard)
+     * 
+     * @param who Determine which player is playing
+     * @param pown Keep track of the number of powns each player has
+     * @param lastPown Keep track of the last player who played a pawn
+     * @param combo Keep track of the number of times a player has won consecutively
+     *
+     * @return The lastpown and combo variables
+     */
     public void handlePownCombo(int who, int[] pown, int lastPown, int[] combo){
-        // System.err.println("who: "+who+" lastPown: "+lastPown+" combo: "+combo[0]+" "+combo[1]);
         if (who == 0){
             pown[who]++;
         } else if (who == 1){
@@ -284,124 +392,140 @@ public class Bob42 implements CXPlayer {
             combo[who]++;
         } else {
             lastPown = who;
-            combo[who] = 1;
+            combo[lastPown] = 1;
         }
-        // System.err.println("who: "+who+" lastPown: "+lastPown+" combo: "+combo[0]+" "+combo[1]);
-        // System.err.println("=======");
-
     }
 
-    public int scoreCount(int minCombo, int[] pown, int[] combo){
+    public int scoreCount(int[] pown, int[] combo){
         int score = 0;
-        score += pown[0] - pown[1] + pown[2];
+        score += pown[0] - pown[1] + pown[2]*2;
+        score += combo[0] * combo[0] * combo[0] * combo[0];
+        score += combo[1] * combo[1] * combo[1] * combo[1];
+        return score;
+    }
+    
+    /**
+     * comboCount function
+     * Checks if either player has achieved the minimum combo length.
+     * 
+     *
+     * @param minCombo Determine the minimum pown needed to get a combo
+     * @param score Store the score how much combo for each player
+     * @param combo Store the number of pown align for each player
+     *
+     * @return The score[] array, which is the first argument
+     */
+    public int[] comboCount(int minCombo, int[] score, int[] combo){
         if (combo[0] >= minCombo){
-            score += combo[0] * combo[0] * combo[0];
+            score[0] += combo[0] * combo[0];
+            score[0] = combo[0] >= minCombo*2-1 ? score[0] + combo[0]*combo[0] : score[0];
         }
         if (combo[1] >= minCombo){
-            score -= combo[1] * combo[1] * combo[1];
+            score[1] += combo[1] * combo[1];
+            score[1] = combo[1] >= minCombo*2-1 ? score[1] + combo[1]*combo[1] : score[1];
         }
         return score;
     }
-
+    
     public int evalRow(CXBoard board, int row){
         // System.err.printf(" eR ");
-        int count = 0;  
+        int score = 0;  
         int lastPown = 2;      // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
         int[] pown = new int[3];        // pown[0] = mio, pown[1] = avversario, pown[2] = free
-        int[] combo = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
-        try{
-            checktimeout();
-        for (int i=0; i<board.N; i++){
-            CXCellState cell = board.cellState(row, i);
-            combo[0] = 0;
-            if (cell == CXCellState.FREE){
-                lastPown = 2;
-                pown[lastPown]++;
-            } else if (cell == CXCellState.P1){
-                handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
-            } else if (cell == CXCellState.P2){                
-                handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
+        int[] combocount = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
+        // try{
+        //     checktimeout();
+        for (int i=0; i+board.X < board.N; i++){
+            int[] combo = new int[2]; 
+            for (int k = 0; k < board.X; k++) {    // combo[0] = combo mio, combo[1] = combo avversario
+                CXCellState cell = board.cellState(row, i+k);
+                if (cell == CXCellState.FREE){
+                    lastPown = 2;
+                    pown[lastPown]++;
+                } else if (cell == CXCellState.P1){
+                    handlePownCombo(0, pown, lastPown, combo);
+                } else if (cell == CXCellState.P2){                
+                    handlePownCombo(1, pown, lastPown, combo);
+                }
             }
+            combocount = comboCount(board.X/2, combocount, combo);
+            score -= tryYourNextMove(board, row, i, pown, combocount);
         }
-        } catch (TimeoutException e) {
-            count = scoreCount(board.N/2, pown, combo);
-        System.err.printf("R");
-            return count*count*count;
-        }
-        count = scoreCount(board.N/2,pown, combo);
-        return count*count*count;
+        // } catch (TimeoutException e) {}
+        score += scoreCount(pown, combocount);
+        return score*score*score;
     }
 
     private int evalCol(CXBoard board, int col){
         // System.err.printf(" eC ");
-        int count = 0;  
+        int score = 0;  
         int lastPown = 2;      // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
         int[] pown = new int[3];        // pown[0] = mio, pown[1] = avversario, pown[2] = free
-        int[] combo = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
-        try{
-            checktimeout();
-        for (int i=0; i<board.M; i++){
-            CXCellState cell = board.cellState(i, col);
-            if (cell == CXCellState.FREE){
-                lastPown = 2;
-                pown[lastPown]++;
-            } else if (cell == CXCellState.P1){
-                handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
-            } else if (cell == CXCellState.P2){
-                handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
+        int[] combocount = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
+        // try{
+        //     checktimeout();
+        for (int i=0; i+ board.X < board.M; i++){
+            int[] combo = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
+            for (int k = 0; k < board.X; k++) {    // combo[0] = combo mio, combo[1] = combo avversario
+                CXCellState cell = board.cellState(i+k, col);
+                if (cell == CXCellState.FREE){
+                    lastPown = 2;
+                    pown[lastPown]++;
+                } else if (cell == CXCellState.P1){
+                    handlePownCombo(0, pown, lastPown, combo);
+                } else if (cell == CXCellState.P2){
+                    handlePownCombo(1, pown, lastPown, combo);
+                }
             }
+            combocount = comboCount(board.X/2, combocount, combo);
+            score -= tryYourNextMove(board, i, col, pown, combocount);
         }
-        count += pown[0] - pown[1] + pown[2];
-        if (combo[0] >= board.X/2){
-            count += combo[0] * combo[0] * combo[0];
-        }
-        if (combo[1] >= board.X/2){
-            count -= combo[1] * combo[1] * combo[1];
-        }
-        } catch (TimeoutException e) {
-            count = scoreCount(board.N/2, pown, combo);
-        System.err.printf("C");
-            return count*count*count;
-        }
-        count = scoreCount(board.N/2, pown, combo);
-        return count*count*count;
+        // } catch (TimeoutException e) {}
+        score += scoreCount(pown, combocount);
+        return score*score*score;
     }
 
     private int evalDiag(CXBoard board, boolean inverse){
         // System.err.printf(" eD ");
-        int invrow = inverse ? board.X-1 : 0;
-        int maxRow = inverse ? 0 : board.X;
+        int invrow = inverse ? board.M : 0;
+        int invcol = inverse ? board.N : 0;
         int score = 0;
         int lastPown = 2;      // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
         int[] pown = new int[3];        // pown[0] = mio, pown[1] = avversario, pown[2] = free
-        int[] combo = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
+        int[] combocount = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
 
         // System.err.println("N: "+board.N+" M: "+board.M+" X: "+board.X+" row "+invrow+" -> "+(board.M - maxRow));
-        try{
-            checktimeout();
-        for (int row = invrow; row <= board.M - maxRow; row++){
-            for (int col = 0; col <= board.N - board.X; col++){         //!  
-                // System.err.println(" col: "+col+" lim "+(board.N - board.X));
-                int diagRow = inverse ? row - col : row + col;
-                if (diagRow < 0 || diagRow >= board.M) continue; // Skip out of bounds
-                if (board.cellState(diagRow, col) == CXCellState.FREE){
-                    lastPown = 2;
-                    pown[lastPown]++;
-                } else if (board.cellState(diagRow, col) == CXCellState.P1){                    
-                    handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
-                } else if (board.cellState(diagRow, col) == CXCellState.P2){
-                    handlePownCombo(myWin == CXGameState.WINP1 ? 0 : 1, pown, lastPown, combo);
+        // try{
+        //     checktimeout();
+        for (int row = invrow; row + board.X <= board.M - invrow; row++){
+            for (int col = invcol; col + board.X <= board.N - invcol; col++){ 
+                int[] combo = new int[2];       // combo[0] = combo mio, combo[1] = combo avversario
+                for (int k = 0; k < board.X; k++){
+                    if (board.cellState(row+k, col+k) == CXCellState.FREE){
+                        lastPown = 2;
+                        pown[lastPown]++;
+                    } else if (board.cellState(row+k, col+k) == CXCellState.P1){                    
+                        handlePownCombo(0, pown, lastPown, combo);
+                    } else if (board.cellState(row+k, col+k) == CXCellState.P2){
+                        handlePownCombo(1, pown, lastPown, combo);
+                    }  
                 }
+                combocount = comboCount(board.X/2, combocount, combo);
+                score -= tryYourNextMove(board, row, col, pown, combocount);
             }
         }
-        } catch (TimeoutException e) {
-            score = scoreCount(board.N/2, pown, combo);
-        System.err.printf("D");
-            return score*score*score;
-        }score = scoreCount(board.N/2, pown, combo);
+        // } catch (TimeoutException e) {}
+        score += scoreCount(pown, combocount);
         return score*score*score;
     }
-    // Hash the board using the Zobrist table
+    
+    /**
+     * The hash function is used to hash the current state of the board.
+     * @param board
+     * @return hash code
+     * 
+     * @Time complexity: O(m*n) time
+     */
     private long hash(CXBoard board) {
         long hash = 0;
         for (int i = 0; i < board.M; i++) {
@@ -416,7 +540,16 @@ public class Bob42 implements CXPlayer {
         return hash;
     }
 
-    // Search the transposition table for the score of the board
+    /**
+     * Search the transposition table for  for the score of the given board state.
+     * If it finds one, it returns the value associated with that board state. 
+     * Otherwise, it returns Integer.MIN_VALUE+1 
+     *
+     * @param CXBoard board Get the hash of the board
+     *
+     * @return The score of the board from the transposition table if it exists, otherwise returns -inf
+     * 
+     */
     private int searchTranspositionTable(CXBoard board) {
         long hash = hash(board);
         if (transpositionTable.containsKey(hash)) {
