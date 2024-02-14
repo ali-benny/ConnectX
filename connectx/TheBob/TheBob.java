@@ -24,9 +24,9 @@ public class TheBob implements CXPlayer {
     private long[][][] zobristTable; // Zobrist table for hashing
     private Map<Long, Integer> transpositionTable;
     private Integer[] moveOrder;
-    private int LAST_TIME;      // Interrompo se TODO
-    private double MAX_TIME;
-    private static final int MAX_ENTRIES = 1000000;
+    private int LAST_TIME;      // in alphabeta
+    private double MAX_TIME;    // % max
+    private static final int MAX_ENTRIES = 256 * 1024 * 1024;    // 256 MiB
     private LinkedList<Long> accessQueue = new LinkedList<Long>();
 
     public TheBob() {
@@ -52,8 +52,8 @@ public class TheBob implements CXPlayer {
 
         TIMEOUT = timeout_in_secs;
         START = System.currentTimeMillis();     // Save starting time
-        LAST_TIME = N >= 40 ? TIMEOUT/2 : 4*TIMEOUT/5;
-        MAX_TIME = N >= 40 ? (98.0 / 100.0) : (99.0 / 100.0);  // 90% del tempo per N >= 40, 99% per N < 40
+        LAST_TIME = N >= 40 ? TIMEOUT/2 : 3*TIMEOUT/4;
+        MAX_TIME = N >= 40 ? (98.0 / 100.0) : (99.0 / 100.0);  // 98% del tempo per N >= 40, 99% per N < 40
 
         // move ordering
         moveOrder = new Integer[N];
@@ -81,11 +81,10 @@ public class TheBob implements CXPlayer {
      *
      * @implNote Time complexity: O(1)
      */
-    private boolean checktimeout() throws TimeoutException {
+    private void checktimeout() throws TimeoutException {
         if (System.currentTimeMillis() - START >= (TIMEOUT * MAX_TIME) * 1000) {
             throw new TimeoutException();
         }
-        return false;
     }
 
     /**
@@ -108,17 +107,20 @@ public class TheBob implements CXPlayer {
             max = searchTranspositionTable(board);
             board.unmarkColumn();
         }
-        for (int i = start+1; i < avlCol.length; i++) {
+        try {
+        for(int i = start+1; i < avlCol.length; i++) {
+            checktimeout();
             if (!board.fullColumn(avlCol[i])) {
                 board.markColumn(avlCol[i]);
                 long val = searchTranspositionTable(board);
                 board.unmarkColumn();
-                if (val > max) {
+                if(val > max) {
                     maxIndex = i;
                     max = val;
                 }
             }
         }
+        } catch (TimeoutException e) {}
         int tmp = avlCol[start];         // mette in testa il valore maggiore trovato
         avlCol[start] = avlCol[maxIndex];
         avlCol[maxIndex] = tmp;
@@ -126,16 +128,15 @@ public class TheBob implements CXPlayer {
     }
 
     public int selectColumn(CXBoard board){
-        if (board.numOfFreeCells() >= 20) return selectColumn_M(board); // TODO quando hanno finito i test rimettere a >= 50
+        if (board.N*board.M >= 100) return selectColumn_M(board); 
         else return selectColumn_m(board);
-        // return selectColumn_M(board);
     }
 
     private int selectColumn_M(CXBoard board) {
         START = System.currentTimeMillis();
         
         int bestCol = -1;
-        int alpha = Integer.MIN_VALUE + 1;      //! Deve esserci il +1 altrimenti non sono opposti
+        int alpha = Integer.MIN_VALUE + 1;
         int beta = Integer.MAX_VALUE;
         Integer[] avlCol = board.getAvailableColumns();
         int freecells = board.numOfFreeCells();
@@ -148,13 +149,10 @@ public class TheBob implements CXPlayer {
         }
         if (board.numOfMarkedCells() == 0) {
             board.markColumn(moveOrder[0]); // Start from the middle column
-            try {
-                alphaBeta_m(board, depth, alpha, beta); // Fill the transposition table
-            } catch (TimeoutException e) {}
+            alphaBeta_m(board, depth, alpha, beta); // Fill the transposition table
             board.unmarkColumn();
             return moveOrder[0];
         } else {
-            try{
             while (depth <= freecells){
                 for (int i = 0; i < board.N; i++) {
                     if (!board.fullColumn(moveOrder[i])) { // If the middlest column is not full
@@ -177,7 +175,7 @@ public class TheBob implements CXPlayer {
                     break;
                 else if (System.currentTimeMillis() - START >= TIMEOUT/2 * 1000)  // ho 1/2 del tempo a disposizione
                     depth = depth + 4 <= freecells ? depth + 4 : freecells;
-            }} catch (TimeoutException e){}
+            }
             if (mark) {
                 board.unmarkColumn(); mark = false;}
             if (bestCol == -1 || board.fullColumn(bestCol)){    // check if will return an illigal move
@@ -189,6 +187,7 @@ public class TheBob implements CXPlayer {
                     board.markColumn(avlCol[i]); mark = true;
                     int eval = alphaBeta_m(board, depth, alpha, beta);
                     board.unmarkColumn(); mark = false;
+                    checktimeout();
                     if (board.gameState() != yourWin){
                         if (board.gameState() == myWin || eval > bestScore){
                             bestCol = avlCol[i];
@@ -207,7 +206,7 @@ public class TheBob implements CXPlayer {
                         }
                     }
                     depth = depth + 2 >= freecells ? freecells : depth + 2;
-                    if (System.currentTimeMillis() - START >= 4*TIMEOUT/5 * 1000)  // ho 1/2 del tempo a disposizione
+                    if (System.currentTimeMillis() - START >= 4*TIMEOUT/5 * 1000)  // ho 1/5 del tempo a disposizione
                         depth = depth + 4 <= freecells ? depth + 4 : freecells;
                 }
                 } catch (TimeoutException e) {
@@ -221,18 +220,16 @@ public class TheBob implements CXPlayer {
         return bestCol;
     }
 
-    public int selectColumn_m(CXBoard board) {
+    // Select di Bob42
+    private int selectColumn_m(CXBoard board) {
         START = System.currentTimeMillis();
         
         int bestCol = -1;
-        int alpha = Integer.MIN_VALUE + 1;      //! Deve esserci il +1 altrimenti non sono opposti
+        int alpha = Integer.MIN_VALUE + 1;
         int beta = Integer.MAX_VALUE;
         Integer[] avlCol = board.getAvailableColumns();
         int freecells = board.numOfFreeCells();
-        freecells = freecells >= 25 ? 20 : freecells;
         int depth = freecells;
-        // int depth = getFreeCells(board).length;
-        boolean mark = false;
 
         if (board.numOfFreeCells() == 0) {  // The board is full, the game is a draw
             System.err.println("The board is full, the game is a draw");
@@ -240,53 +237,45 @@ public class TheBob implements CXPlayer {
         }
         if (board.numOfMarkedCells() == 0) {
             board.markColumn(moveOrder[0]); // Start from the middle column
-            try{alphaBeta_m(board, depth, alpha, beta); // Fill the transposition table
-            }catch (TimeoutException e) {}
+            alphaBeta_m(board, depth, alpha, beta); // Fill the transposition table
             board.unmarkColumn();
             return moveOrder[0];
         } else {
-            try{
-            while (depth >= freecells){
-            for (int i = 0; i < board.N; i++) {
-                if (!board.fullColumn(moveOrder[i])) { // If the middlest column is not full
-                    int col = selectSort(board, moveOrder, i);
-                    board.markColumn(col);
-                    mark = true;
-                    if (board.gameState() == myWin){           // se fa vincere il giocatore, termina ritornando la colonna corrente
+            while (depth >= freecells) {
+                for (int i = 0; i < board.N; i++) {
+                    if (!board.fullColumn(moveOrder[i])) { // If the middlest column is not full
+                        int col = selectSort(board, moveOrder, i);
+                        board.markColumn(col);
+                        if (board.gameState() == myWin){        // se fa vincere il giocatore, termina ritornando la colonna corrente
+                            board.unmarkColumn();
+                            return col;
+                        }
+                        int eval = alphaBeta_m(board, depth, alpha, beta);
+                        if (eval > alpha) {
+                            alpha = eval;
+                            bestCol = col;
+                        }
                         board.unmarkColumn();
-                        mark = false;
-                        return col;
                     }
-                    int eval = alphaBeta_m(board, depth, alpha, beta);
-                    if (eval > alpha) {
-                        alpha = eval;
-                        bestCol = col;
-                    }
-                    board.unmarkColumn();
-                    mark = false;
                 }
-            }
-            depth--;
+                depth--;
                 if (System.currentTimeMillis() - START > 4*TIMEOUT/5 * 1000)  // se 1/4 del tempo
                     break;
                 if (System.currentTimeMillis() - START > TIMEOUT/2 * 1000)  // ho 3/4 del tempo a disposizione
                     depth -= 3;
-            }}catch (TimeoutException e) {}
-            if (mark) {
-                board.unmarkColumn(); mark = false;}
+            }
             if (bestCol == -1){         // No winning move found
                 depth = board.numOfFreeCells()/2;
                 int bestScore = Integer.MIN_VALUE + 1;
                 avlCol = board.getAvailableColumns();
                 int maxFreeCell = maxColFreeCells(board, avlCol);
 
-                try { 
-                for (int i=0; i < avlCol.length; i++){ // If the middlest column is full, search for the first free cell in the moveOrder array (from the middlest column to the sides                    
+                try{
+                for (int i=0; i<avlCol.length; i++){                   
                     board.markColumn(avlCol[i]);
-                    mark = true;
                     int eval = alphaBeta_m(board, depth, alpha, beta);
                     board.unmarkColumn();
-                    mark = false;
+                    checktimeout();
                     if (board.gameState() != yourWin){
                         if (board.gameState() == myWin || eval > bestScore){
                             bestCol = avlCol[i];
@@ -309,7 +298,6 @@ public class TheBob implements CXPlayer {
                 }
                 } catch (TimeoutException e) {
                     if (bestCol == -1 || board.fullColumn(bestCol)) { // bestCol could be illigal move
-                        // System.err.println("using random col");
                         return avlCol[Math.abs(new Random().nextInt()) % avlCol.length];    
                     }
                 }
@@ -318,7 +306,7 @@ public class TheBob implements CXPlayer {
         return bestCol;
     }
 
-    
+
     /**
      * The maxColFreeCells function count for each free cell's column how much free cells there are.
      *
@@ -346,7 +334,7 @@ public class TheBob implements CXPlayer {
         }
         return maxFreeCellsColumn;
     }
-    
+
     /**
      * The getFreeCells function returns an array of all the free cells on the board.
      * 
@@ -376,21 +364,19 @@ public class TheBob implements CXPlayer {
      * @param alpha The alpha value
      * @param beta The beta value
      * @return The best score
-     * 
-     * @implNote Time complexity: O(b^depth) | b = branching factor
      */
-    private int alphaBeta_M(CXBoard board, int depth, int alpha, int beta) throws TimeoutException {
+    private int alphaBeta_M(CXBoard board, int depth, int alpha, int beta) {
+        try {
+
             int transpositionScore = searchTranspositionTable(board);
-            if (transpositionScore != Integer.MIN_VALUE +1) {       // If the score is already in the transposition table, return it
+            if (transpositionScore != Integer.MIN_VALUE +1) { // If the score is already in the transposition table, return it
                 return transpositionScore;
             }
-            // if (!checktimeout() && System.currentTimeMillis() - START >= LAST_TIME * 1000)
-            //     throw new TimeoutException();
             if (depth <= 0 || board.gameState() != CXGameState.OPEN) // If the depth is 0 or the game is over, return the evaluation
                 return evaluate(board);
             if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
                 throw new TimeoutException();
-            else checktimeout();   
+            else checktimeout();        // manca 1% del timeout
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
                     board.markColumn(moveOrder[col]);
@@ -402,9 +388,10 @@ public class TheBob implements CXPlayer {
                         alpha = eval;
                 }
             }
-            saveTranspositionTable(board, alpha);
+            saveTranspositionTable(board, alpha); // Save the score in the transposition table
             return alpha;
-        // return evaluate(board);
+        } catch (TimeoutException e) {}
+        return evaluate(board);
     }
 
     /**
@@ -414,36 +401,35 @@ public class TheBob implements CXPlayer {
      * @param depth The actual depth of the tree
      * @param alpha The alpha value
      * @param beta The beta value
-     * @return The best score found for not lose
-     * 
-     * @implNote Time complexity: O(b^depth) | b = branching factor
+     * @return The best score
      */
-    private int alphaBeta_m(CXBoard board, int depth, int alpha, int beta) throws TimeoutException {        
+    private int alphaBeta_m(CXBoard board, int depth, int alpha, int beta) {
+        try {
+
             int transpositionScore = searchTranspositionTable(board);
-            if (transpositionScore != Integer.MIN_VALUE+1) {            // If the score is already in the transposition table, return it
+            if (transpositionScore != Integer.MIN_VALUE+1) {
                 return transpositionScore;
             }
-            // if (!checktimeout() && System.currentTimeMillis() - START >= LAST_TIME * 1000)
-            //     throw new TimeoutException();
-            if (depth <= 0 || board.gameState() != CXGameState.OPEN)    // I'm at the root of the tree or the game is over, return the evaluation
+            if (depth <= 0 || board.gameState() != CXGameState.OPEN)
                 return evaluate(board);
             if (System.currentTimeMillis() - START >= LAST_TIME * 1000)
                 throw new TimeoutException();
-            else checktimeout();   
+            else checktimeout();        // manca 1% del timeout
             for (int col = 0; col < board.N; col++) {
                 if (!board.fullColumn(moveOrder[col])){
-                    board.markColumn(moveOrder[col]);   // O(1)
+                    board.markColumn(moveOrder[col]);
                     int eval = alphaBeta_M(board, depth - 1, alpha, beta);
-                    board.unmarkColumn();               // O(1)
+                    board.unmarkColumn();
                     if (eval <= alpha)
                         return alpha; // cutoff
                     if (eval < beta)
                         beta = eval;
                 }
-            }   
+            }
             saveTranspositionTable(board, beta);
             return beta;
-        // return evaluate(board);     // O(m*n*x)
+        } catch (TimeoutException e) {}
+        return evaluate(board);
     }
 
     /**
@@ -517,7 +503,7 @@ public class TheBob implements CXPlayer {
      * 
      * @see #evaluate(CXBoard)
      * 
-     * @param who Determine which player is playing
+     * @param who Who's the pown
      * @param pown Keep track of the number of powns each player has
      * @param lastPown Keep track of the last player who played a pawn
      * @param combo Keep track of the number of times a player has won consecutively
@@ -565,21 +551,21 @@ public class TheBob implements CXPlayer {
      * Checks if either player has achieved the minimum combo length.
      * 
      *
-     * @param minCombo Determine the minimum pown needed to get a combo
+     * @param boardX Determine the minimum pown needed to get a combo
      * @param score Store the score how much combo for each player
      * @param combo Store the number of pown align for each player
      * @return The score[] array updated
      * 
      * @implNote time complexity O(1)
      */
-    public int[] comboCount(int minCombo, int[] score, int[] combo){
-        if (combo[0] >= minCombo){
+    public int[] comboCount(int boardX, int[] score, int[] combo){
+        if (combo[0] >= boardX/2){
             score[0] += combo[0] * combo[0];
-            score[0] = combo[0] >= minCombo*2-1 ? score[0] + combo[0]*combo[0] : score[0];
+            score[0] = combo[0] >= boardX-1 ? score[0] + combo[0]*combo[0] : score[0];
         }
-        if (combo[1] >= minCombo){
+        if (combo[1] >= boardX/2){
             score[1] += combo[1] * combo[1];
-            score[1] = combo[1] >= minCombo*2-1 ? score[1] + combo[1]*combo[1] : score[1];
+            score[1] = combo[1] >= boardX-1 ? score[1] + combo[1]*combo[1] : score[1];
         }
         return score;
     }
@@ -599,7 +585,7 @@ public class TheBob implements CXPlayer {
         int lastPown = 2;               // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
         int[] pown = new int[3];        // numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
         int[] combocount = new int[2];  // numero di combo - [combo[0] = combo mio, combo[1] = combo avversario]
-
+        
         for (int i=0; i+board.X < board.N; i++){
             int[] combo = new int[2];   // pedine consecutive per ciascun giocatore
             for (int k = 0; k < board.X; k++) {
@@ -651,6 +637,7 @@ public class TheBob implements CXPlayer {
             }
             combocount = comboCount(board.X/2, combocount, combo);
             score -= tryYourNextMove(board, i, col, pown, combocount);
+            score -= pown[2] < board.X ? pown[2]*3 : 0;    // abbasso il punteggio di scelta per colonne senza possibilià di combo verticale
         }
         score += scoreCount(pown, combocount);
         return score*score*score;
@@ -670,13 +657,14 @@ public class TheBob implements CXPlayer {
     private int evalDiag(CXBoard board, boolean inverse){
         int invrow = inverse ? board.M : 0;
         int invcol = inverse ? board.N : 0;
+        int increase = inverse ? -1 : +1;
         int score = 0;
         int lastPown = 2;               // di chi è l'ultima pedina incontrata (0 = mia, 1 = avversario, 2 = free)
         int[] pown = new int[3];        // numero di pedine - [pown[0] = mio, pown[1] = avversario, pown[2] = free]
         int[] combocount = new int[2];  // numero di combo - [combo[0] = combo mio, combo[1] = combo avversario]
 
-        for (int row = invrow; row + board.X <= board.M - invrow; row++){
-            for (int col = invcol; col + board.X <= board.N - invcol; col++){ 
+        for (int row = invrow; row + board.X <= board.M - invrow; row+=increase){
+            for (int col = invcol; col + board.X <= board.N - invcol; col+=increase){ 
                 int[] combo = new int[2];      // pedine consecutive per ciascun giocatore
                 for (int k = 0; k < board.X; k++){
                     CXCellState cell = board.cellState(row+k, col+k);   // O(1)
@@ -733,8 +721,10 @@ public class TheBob implements CXPlayer {
         Long hash = hash(board);
         if (transpositionTable.containsKey(hash)) {
             // Move this key to the end of the access queue
-            accessQueue.remove(hash);
-            accessQueue.addLast(hash);
+            if (board.N >= 20){
+                accessQueue.remove(hash);
+                accessQueue.addLast(hash);
+            }
             return transpositionTable.get(hash);
         } else {
             return Integer.MIN_VALUE+1;
@@ -752,12 +742,12 @@ public class TheBob implements CXPlayer {
      */
     private void saveTranspositionTable(CXBoard board, int score) {
         Long key = hash(board);
-        if (transpositionTable.size() >= MAX_ENTRIES) {
+        if (transpositionTable.size() >= MAX_ENTRIES && board.N >= 20) {
             Long leastRecentlyUsedKey = accessQueue.removeFirst();
             transpositionTable.remove(leastRecentlyUsedKey);
         }
         transpositionTable.put(key, score);
-        accessQueue.addLast(key);
+        if (board.N >= 20) accessQueue.addLast(key);
     }
 
     public String playerName() {
